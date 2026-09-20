@@ -1,321 +1,221 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <script src="https://kit.fontawesome.com/59032b78a7.js" crossorigin="anonymous"></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MAJ Nguyen / Research</title>
-    <meta name="description" content="Research publications and academic work by MAJ Phuoc H Nguyen">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
-    <!-- Google fonts - Montserrat for headings, Cardo for copy-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Cardo:400,400italic,700">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.png">
-  </head>
-  <body>
-    <aside class="retirement-countdown" aria-label="Retirement countdown" data-retirement-date="2029-08-19T00:00:00-04:00">
-      <span class="retirement-countdown__label">Retirement</span>
-      <span class="retirement-countdown__time">
-        <span><strong data-countdown-days>--</strong><em>days</em></span>
-        <span><strong data-countdown-hours>--</strong><em>hrs</em></span>
-        <span><strong data-countdown-minutes>--</strong><em>min</em></span>
-        <span><strong data-countdown-seconds>--</strong><em>sec</em></span>
-      </span>
-    </aside>
-    <!-- navbar-->
-    <header class="header">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container"> 
-          <a href="index.html" class="navbar-brand link-scroll">
-            <img src="img/logo.png" alt="" class="img-fluid"> 
-          </a>
-          <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">
-            <i class="fa fa-bars"></i>
-          </button>
-          <div id="navbarSupportedContent" class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-              <li class="nav-item"><a href="index.html#projects" class="nav-link">Projects</a></li>
-              <li class="nav-item"><a href="https://solpient-research-app.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link">SOLPIENT</a></li>
-              <li class="nav-item"><a href="resume.pdf" class="nav-link">Download Resume</a></li>
-              <li class="nav-item"><a href="https://www.linkedin.com/in/phuoc-nguyen-7634b25/" target="_blank" class="nav-link">LinkedIn</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <title>Research | Phuoc H. Nguyen</title>
+  <meta name="description" content="Research by Phuoc H. Nguyen in applied AI, text summarization, bias evaluation, analytics, and SOLPIENT Research.">
+  <link rel="shortcut icon" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/59032b78a7.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/portfolio-v2.css">
+</head>
+<body>
+  <nav class="site-nav is-scrolled" aria-label="Primary navigation">
+    <div class="container-v2 nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <span>Phuoc Nguyen</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#work">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#solpient-research">SOLPIENT Research</a>
+        <a href="https://www.linkedin.com/in/phuoc-nguyen-7634b25/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="nav-cta" href="https://solpient-research-app.vercel.app/" target="_blank" rel="noopener noreferrer">SOLPIENT ↗</a>
+      </div>
+    </div>
+  </nav>
 
-    <!-- Research Header -->
-    <section id="research-intro" style="background-image: url('img/japan-mountains.jpg');" class="intro">       
-      <div class="overlay"></div>
-      <div class="content">
-        <div class="container clearfix">
-          <div class="row">
-            <div class="col-lg-8 col-md-12 mx-auto">
-              <p class="italic">Academic Research</p>
-              <h1>Published & Pre-published Work</h1>
-              <p class="italic">Research contributions in AI, text summarization, and data science</p>
+  <main>
+    <section class="research-hero-v2">
+      <div class="container-v2 research-hero-inner">
+        <div class="eyebrow">Research portfolio</div>
+        <h1>Question the output.<br><span>Preserve the evidence.</span></h1>
+        <p>Applied research in AI evaluation, text summarization, statistical analysis, and systems that make reasoning inspectable over time.</p>
+        <div class="hero-actions">
+          <a class="btn-v2 btn-primary-v2" href="#publications">Publications</a>
+          <a class="btn-v2 btn-ghost-v2" href="https://github.com/ngkenzy" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+      </div>
+      <div class="research-orbit" aria-hidden="true">
+        <span class="orbit o1"></span><span class="orbit o2"></span><span class="orbit o3"></span><span class="research-core"></span>
+      </div>
+    </section>
+
+    <section id="publications" class="section-v2">
+      <div class="container-v2">
+        <div class="section-head reveal">
+          <div class="kicker">Publications</div>
+          <h2>Applied AI evaluation, not just model output.</h2>
+          <p>The work focuses on evaluating behavior, bias, and quality rather than assuming a generated answer is correct because it is fluent.</p>
+        </div>
+
+        <div class="research-list">
+          <article class="research-feature reveal">
+            <div class="research-index">01</div>
+            <div>
+              <div class="paper-meta light"><span>2024 · arXiv</span><span>AI / NLP</span></div>
+              <h3>Evaluating AI-generated text summaries using OpenAI's GPT model</h3>
+              <p>This research investigates the effectiveness of AI-generated text summaries using OpenAI's GPT model, with emphasis on summary quality, accuracy, and evaluation.</p>
+              <div class="work-links">
+                <a href="http://arxiv.org/abs/2405.04053" target="_blank" rel="noopener noreferrer">View on arXiv ↗</a>
+                <a href="Evaluating_AI_generated_text_summaries_using_Open_AI_s_GPT_model.pdf" target="_blank">Local PDF →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="research-feature reveal">
+            <div class="research-index">02</div>
+            <div>
+              <div class="paper-meta light"><span>Pre-publication</span><span>Bias evaluation</span></div>
+              <h3>Iterative Bias Evaluation Approach for Sentiment-Aware Text Summarization</h3>
+              <p>An iterative methodology for examining bias in sentiment-aware summarization and improving the rigor of model evaluation.</p>
+              <div class="work-links">
+                <a href="Sentiment_Aware_Text_Summarization.pdf" target="_blank">Read manuscript →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="research-feature reveal">
+            <div class="research-index">03</div>
+            <div>
+              <div class="paper-meta light"><span>Applied statistics</span><span>Health analytics</span></div>
+              <h3>Predictive Analytics for Coronary Heart Disease</h3>
+              <p>Logistic-regression analysis of the Framingham dataset to identify interpretable predictors of ten-year coronary heart disease risk.</p>
+              <div class="work-links">
+                <a href="https://www.overleaf.com/read/vhwwkprsbtsx#e55231" target="_blank" rel="noopener noreferrer">Read paper ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="solpient-research" class="section-v2 section-dark">
+      <div class="container-v2">
+        <div class="solpient-panel reveal">
+          <div class="solpient-copy">
+            <span class="project-badge-v2">Independent research system</span>
+            <h2>SOLPIENT Research</h2>
+            <div class="founder">Founded & built by Phuoc H. Nguyen</div>
+            <p><strong>See clearly. Invest deliberately.</strong></p>
+            <p>SOLPIENT preserves point-in-time research rather than silently overwriting it. Each version can be compared with later evidence, realized outcomes, and prediction error to create a durable record of what the analysis believed and why.</p>
+            <div class="stack-tags">
+              <span>Research versions</span><span>SEC monitoring</span><span>XBRL</span><span>13F</span><span>Form 4</span><span>Prediction scoring</span>
+            </div>
+            <div class="hero-actions">
+              <a class="btn-v2 btn-primary-v2" href="https://solpient-research-app.vercel.app/" target="_blank" rel="noopener noreferrer">Open Live Site</a>
+              <a class="btn-v2 btn-ghost-v2" href="https://github.com/ngkenzy/solpient-research" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub Repository</a>
+            </div>
+          </div>
+          <div class="research-system-graphic">
+            <div class="system-stage">
+              <span>01</span><strong>Capture</strong><small>Research thesis & assumptions</small>
+            </div>
+            <div class="system-line"></div>
+            <div class="system-stage">
+              <span>02</span><strong>Monitor</strong><small>Filings, fundamentals & market data</small>
+            </div>
+            <div class="system-line"></div>
+            <div class="system-stage">
+              <span>03</span><strong>Compare</strong><small>New evidence vs prior belief</small>
+            </div>
+            <div class="system-line"></div>
+            <div class="system-stage">
+              <span>04</span><strong>Score</strong><small>Outcomes & prediction error</small>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Research Publications -->
-    <section id="publications" class="text">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <h2 class="heading">Published Research</h2>
-            <div class="row">
-              <div class="col-lg-8 mx-auto">
-                <div class="publication-card">
-                  <div class="publication-header">
-                    <div class="publication-icon">
-                      <i class="fas fa-file-alt"></i>
-                    </div>
-                    <div class="publication-meta">
-                      <span class="publication-type published">Published</span>
-                      <span class="publication-date">2024</span>
-                    </div>
-                  </div>
-                  <h3>Evaluating AI-generated text summaries using Open AI's GPT model</h3>
-                  <p class="publication-abstract">
-                    This research investigates the effectiveness of AI-generated text summaries using OpenAI's GPT model. 
-                    The study evaluates the quality, accuracy, and bias in automated summarization techniques, providing 
-                    insights into the current state of AI text processing capabilities.
-                  </p>
-                  <div class="publication-details">
-                    <p><strong>Journal:</strong> arXiv preprint</p>
-                    <p><strong>DOI:</strong> <a href="http://arxiv.org/abs/2405.04053" target="_blank">arXiv:2405.04053</a></p>
-                    <p><strong>Access:</strong> The paper password for this article is: <code>2spza</code></p>
-                  </div>
-                  <div class="publication-actions">
-                    <a href="http://arxiv.org/abs/2405.04053" target="_blank" class="btn btn-primary">
-                      <i class="fas fa-external-link-alt"></i> View Paper
-                    </a>
-                    <a href="http://arxiv.org/abs/2405.04053" target="_blank" class="btn btn-outline-secondary">
-                      <i class="fas fa-download"></i> Download PDF
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <section class="section-v2 section-soft">
+      <div class="container-v2">
+        <div class="section-head reveal">
+          <div class="kicker">Research areas</div>
+          <h2>Where I keep pulling the thread.</h2>
+        </div>
+        <div class="cap-grid">
+          <article class="cap-card reveal">
+            <div class="cap-icon"><i class="fas fa-brain"></i></div>
+            <h3>AI evaluation</h3>
+            <p>How do we know whether an AI system is actually useful, reliable, unbiased enough for the task, and better than the process it replaces?</p>
+          </article>
+          <article class="cap-card reveal">
+            <div class="cap-icon"><i class="fas fa-chart-simple"></i></div>
+            <h3>Statistical decision support</h3>
+            <p>Interpretable statistical models and quantitative methods for turning noisy evidence into a decision without hiding uncertainty.</p>
+          </article>
+          <article class="cap-card reveal">
+            <div class="cap-icon"><i class="fas fa-clock-rotate-left"></i></div>
+            <h3>Point-in-time reasoning</h3>
+            <p>Preserving what was known and believed at a specific date so later outcomes can test the original thesis honestly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-v2">
+      <div class="container-v2 timeline-grid">
+        <div class="timeline-intro reveal">
+          <div class="kicker">Academic foundation</div>
+          <h2>Statistics, business, and computer science.</h2>
+          <p>The combination matters: quantitative rigor, organizational context, and the ability to build the system that carries the analysis.</p>
+        </div>
+        <div class="timeline reveal">
+          <div class="timeline-item">
+            <small>In progress</small>
+            <h3>MS Computer Science · University of Colorado Boulder</h3>
+            <p>Expanding software, systems, and computer science depth.</p>
+          </div>
+          <div class="timeline-item">
+            <small>2025</small>
+            <h3>MS Applied Statistics & Data Science · University of Kansas</h3>
+            <p>Statistical modeling, experimental design, multivariate analysis, data mining, Python, R, and SQL.</p>
+          </div>
+          <div class="timeline-item">
+            <small>2024</small>
+            <h3>MBA · University of Kansas</h3>
+            <p>Finance, strategy, leadership, economics, and organizational decision-making.</p>
+          </div>
+          <div class="timeline-item">
+            <small>2007</small>
+            <h3>BS Applied Mathematics & Economics · Northern Illinois University</h3>
+            <p>Quantitative foundation for modeling, economics, and analytical problem solving.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Pre-published Research -->
-    <section id="pre-published" class="text" style="background-color: #f8f9fa;">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <h2 class="heading">Pre-published Research</h2>
-            <div class="row">
-              <div class="col-lg-8 mx-auto">
-                <div class="publication-card">
-                  <div class="publication-header">
-                    <div class="publication-icon">
-                      <i class="fas fa-edit"></i>
-                    </div>
-                    <div class="publication-meta">
-                      <span class="publication-type prepublished">Pre-published</span>
-                      <span class="publication-date">2024</span>
-                    </div>
-                  </div>
-                  <h3>Iterative Bias Evaluation Approach for Sentiment Aware Text Summarization</h3>
-                  <p class="publication-abstract">
-                    This work presents an innovative approach to evaluating and mitigating bias in sentiment-aware 
-                    text summarization systems. The research introduces an iterative methodology for bias detection 
-                    and correction, improving the fairness and accuracy of AI-generated summaries.
-                  </p>
-                  <div class="publication-details">
-                    <p><strong>Status:</strong> Under Review</p>
-                    <p><strong>Keywords:</strong> Text Summarization, Bias Evaluation, Sentiment Analysis, AI Ethics</p>
-                    <p><strong>Research Area:</strong> Natural Language Processing, Machine Learning</p>
-                  </div>
-                  <div class="publication-actions">
-                    <a href="Sentiment_Aware_Text_Summarization.pdf" target="_blank" class="btn btn-primary">
-                      <i class="fas fa-file-pdf"></i> Read Pre-print
-                    </a>
-                    <a href="Sentiment_Aware_Text_Summarization.pdf" target="_blank" class="btn btn-outline-secondary">
-                      <i class="fas fa-download"></i> Download PDF
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <section class="contact-v2">
+      <div class="container-v2 contact-panel">
+        <div class="contact-copy">
+          <div class="kicker">Research & collaboration</div>
+          <h2>Useful questions are worth building around.</h2>
+          <p>Applied AI, analytics, investment research systems, and decision science.</p>
+        </div>
+        <div class="contact-links">
+          <a class="btn-v2 btn-primary-v2" href="mailto:ngkenzy@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+          <a class="btn-v2 btn-ghost-v2" href="index.html">Portfolio</a>
         </div>
       </div>
     </section>
+  </main>
 
-    <!-- SOLPIENT Research -->
-    <section id="solpient-research" class="text" style="background-color: #f8f9fa;">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <div class="publication-card">
-              <div class="publication-header">
-                <div class="publication-icon"><i class="fas fa-microscope"></i></div>
-                <div class="publication-meta"><span class="publication-type published">Research Hub</span></div>
-              </div>
-              <h3>SOLPIENT Research</h3>
-              <p class="project-role">Founded &amp; built by Phuoc H. Nguyen</p>
-              <p class="publication-abstract">A point-in-time fundamental investment research system designed to preserve each research version, compare new evidence with prior assumptions, and build a durable historical research dataset. The platform uses Next.js, TypeScript, Supabase/PostgreSQL, Vercel, and GitHub.</p>
-              <div class="publication-actions">
-                <a href="https://solpient-research-app.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                  <i class="fas fa-external-link-alt"></i> Open SOLPIENT
-                </a>
-                <a href="https://github.com/ngkenzy/solpient-research" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">
-                  <i class="fab fa-github"></i> GitHub Repository
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <footer class="footer-v2">
+    <div class="container-v2 footer-row">
+      <span>© 2026 Phuoc H. Nguyen</span>
+      <span><a href="index.html">Home</a> · <a href="https://solpient-research-app.vercel.app/" target="_blank" rel="noopener noreferrer">SOLPIENT</a> · <a href="https://github.com/ngkenzy" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+    </div>
+  </footer>
 
-    <!-- Research Areas -->
-    <section id="research-areas" class="text">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <h2 class="heading">Research Areas</h2>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="research-area-card">
-                  <div class="research-icon">
-                    <i class="fas fa-brain"></i>
-                  </div>
-                  <h4>Artificial Intelligence</h4>
-                  <p>Research in AI text processing, natural language understanding, and machine learning applications for military and civilian use cases.</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="research-area-card">
-                  <div class="research-icon">
-                    <i class="fas fa-chart-bar"></i>
-                  </div>
-                  <h4>Data Science & Analytics</h4>
-                  <p>Advanced statistical modeling, predictive analytics, and data-driven decision support systems for military operations and intelligence analysis.</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="research-area-card">
-                  <div class="research-icon">
-                    <i class="fas fa-shield-alt"></i>
-                  </div>
-                  <h4>Military Intelligence</h4>
-                  <p>Research in intelligence analysis systems, threat assessment models, and operational research for military applications.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Academic Background -->
-    <section id="academic-background" class="text" style="background-color: #f8f9fa;">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <h2 class="heading">Academic Background</h2>
-            <div class="row">
-              <div class="col-lg-8 mx-auto">
-                <div class="academic-timeline">
-                  <div class="timeline-item">
-                    <div class="timeline-marker current"></div>
-                    <div class="timeline-content">
-                      <h4>University of Colorado Boulder</h4>
-                      <p class="timeline-degree">Master of Computer Science</p>
-                      <p class="timeline-period">2025 - Present (Expected Graduation: 2027)</p>
-                      <p>Focus on advanced computer science principles and applications in AI and machine learning.</p>
-                    </div>
-                  </div>
-                  <div class="timeline-item">
-                    <div class="timeline-marker current"></div>
-                    <div class="timeline-content">
-                      <h4>University of Kansas</h4>
-                      <p class="timeline-degree">Master of Science in Applied Statistics and Data Science</p>
-                      <p class="timeline-period">2025</p>
-                      <p>Advanced studies in statistical modeling, data analysis, and machine learning applications.</p>
-                    </div>
-                  </div>
-                  <div class="timeline-item">
-                    <div class="timeline-marker completed"></div>
-                    <div class="timeline-content">
-                      <h4>University of Kansas</h4>
-                      <p class="timeline-degree">Master of Business Administration</p>
-                      <p class="timeline-period">2024</p>
-                      <p>Business administration with focus on strategic management and organizational leadership.</p>
-                    </div>
-                  </div>
-                  <div class="timeline-item">
-                    <div class="timeline-marker completed"></div>
-                    <div class="timeline-content">
-                      <h4>Northern Illinois University</h4>
-                      <p class="timeline-degree">BS in Applied Mathematics & BS in Economics</p>
-                      <p class="timeline-period">2007</p>
-                      <p>Dual degree program providing strong foundation in mathematical modeling and economic analysis.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="text">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <h2 class="heading">Research Collaboration</h2>
-            <p class="lead">Interested in collaborating on research projects or discussing academic opportunities?</p>
-            <div class="contact-info">
-              <p><i class="fas fa-envelope"></i> <a href="mailto:phuoc.h.nguyen6.mil@army.mil">phuoc.h.nguyen6.mil@army.mil</a></p>
-              <p><i class="fas fa-globe"></i> <a href="https://github.com/ngkenzy" target="_blank">GitHub: ngkenzy</a></p>
-              <p><i class="fas fa-map-marker-alt"></i> Pentagon, Washington, D.C.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer style="background-color: #111;">
-      <div class="container"> 
-        <div class="row copyright">
-          <div class="col-md-6">
-            <p class="mb-md-0 text-center text-md-left">&copy;2026 Phuoc H. Nguyen</p>
-          </div>
-          <div class="col-md-6">
-            <p class="credit mb-md-0 text-center text-md-right">
-              <a href="index.html">Back to Portfolio</a> | 
-              Contact: <a href="mailto:ngkenzy@gmail.com">ngkenzy@gmail.com</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- JavaScript files-->
-    <script src="js/retirement-countdown.js"></script>
-    <script src="js/front.js"></script>
-  </body>
-</html> 
+  <script src="js/portfolio-v2.js"></script>
+</body>
+</html>
