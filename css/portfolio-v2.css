@@ -554,3 +554,250 @@ button, a { -webkit-tap-highlight-color: transparent; }
     margin: 18px 0 36px;
   }
 }
+
+
+/* Unified dark professional theme */
+:root {
+  --ink: #e8eef6;
+  --muted: #94a4b8;
+  --line: #263649;
+  --soft: #0d1723;
+  --card: #152131;
+}
+
+body {
+  color: var(--ink);
+  background: #0b1420;
+}
+
+.section-v2 {
+  position: relative;
+  overflow: hidden;
+  background: #0f1926;
+}
+#about {
+  background:
+    radial-gradient(circle at 8% 10%, rgba(79,124,255,.08), transparent 26%),
+    linear-gradient(180deg, #101b29 0%, #0d1723 100%);
+}
+#capabilities,
+.section-soft {
+  background:
+    radial-gradient(circle at 90% 18%, rgba(89,215,198,.05), transparent 26%),
+    #0c1622;
+}
+#work {
+  background:
+    radial-gradient(circle at 8% 16%, rgba(79,124,255,.055), transparent 24%),
+    #101a27;
+}
+#experience {
+  background: #0c1622;
+}
+
+.section-head h2,
+.section-title,
+.about-copy h2,
+.timeline-intro h2,
+.research-feature h3,
+.cap-card h3,
+.work-card h3,
+.timeline-item h3 {
+  color: #edf3fa;
+}
+
+.section-head p,
+.about-copy p,
+.timeline-intro p,
+.cap-card p,
+.work-card p,
+.timeline-item p,
+.research-feature p {
+  color: #93a3b8;
+}
+
+.kicker { color: #7fa2ff; }
+
+.about-item strong { color: #e8eef6; }
+.about-item span { color: #8899ae; }
+
+.about-icon,
+.cap-icon,
+.work-icon {
+  background: #19283a;
+  color: #8aa7ff;
+  border: 1px solid #26384d;
+}
+
+.cap-card,
+.work-card {
+  background: linear-gradient(180deg, rgba(24,37,54,.95), rgba(18,29,44,.95));
+  border-color: #28394d;
+  box-shadow: 0 18px 45px rgba(0,0,0,.16);
+}
+.cap-card:hover,
+.work-card:hover {
+  border-color: #46628d;
+  box-shadow: 0 24px 55px rgba(0,0,0,.24);
+}
+.cap-number { color: #304258; }
+.work-tag { color: #7589a2; }
+.work-links a { color: #9db5ff; }
+
+.timeline::before { background: #2a3b50; }
+.timeline-item::before {
+  background: #101a27;
+  border-color: #6f91f3;
+  box-shadow: 0 0 0 5px #172438;
+}
+.timeline-item small { color: #6f849f; }
+
+.research-feature {
+  border-color: #25364a;
+}
+.research-index { color: #33465e; }
+.paper-meta.light { color: #6f849f; }
+
+.btn-primary-v2 {
+  color: #08111d;
+  background: #88a5ff;
+  border-color: #88a5ff;
+  box-shadow: 0 10px 28px rgba(26,54,118,.22);
+}
+.btn-primary-v2:hover { background: #9ab3ff; border-color: #9ab3ff; }
+.btn-outline-v2 {
+  color: #d9e3ef;
+  background: #142131;
+  border-color: #34475e;
+}
+
+.contact-v2 { background: #08121d; }
+
+/* Section depth scenes */
+.depth-section > .container-v2 {
+  position: relative;
+  z-index: 2;
+}
+.depth-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  perspective: 900px;
+  overflow: hidden;
+  opacity: .48;
+}
+
+/* Wireframe cubes */
+.depth-cube {
+  position: absolute;
+  width: 82px;
+  height: 82px;
+  transform-style: preserve-3d;
+  animation: depthCubeSpin 22s linear infinite;
+}
+.depth-cube i {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border: 1px solid rgba(112,145,230,.24);
+  background: rgba(79,124,255,.018);
+}
+.depth-cube i:nth-child(1) { transform: translateZ(41px); }
+.depth-cube i:nth-child(2) { transform: rotateY(180deg) translateZ(41px); }
+.depth-cube i:nth-child(3) { transform: rotateY(90deg) translateZ(41px); }
+.depth-cube i:nth-child(4) { transform: rotateY(-90deg) translateZ(41px); }
+.depth-cube i:nth-child(5) { transform: rotateX(90deg) translateZ(41px); }
+.depth-cube i:nth-child(6) { transform: rotateX(-90deg) translateZ(41px); }
+.depth-cube.c1 { right: 7%; top: 14%; }
+.depth-cube.c2 {
+  left: 4%;
+  bottom: 10%;
+  width: 54px;
+  height: 54px;
+  animation-duration: 31s;
+  animation-direction: reverse;
+}
+.depth-cube.c2 i:nth-child(1) { transform: translateZ(27px); }
+.depth-cube.c2 i:nth-child(2) { transform: rotateY(180deg) translateZ(27px); }
+.depth-cube.c2 i:nth-child(3) { transform: rotateY(90deg) translateZ(27px); }
+.depth-cube.c2 i:nth-child(4) { transform: rotateY(-90deg) translateZ(27px); }
+.depth-cube.c2 i:nth-child(5) { transform: rotateX(90deg) translateZ(27px); }
+.depth-cube.c2 i:nth-child(6) { transform: rotateX(-90deg) translateZ(27px); }
+
+.depth-ring {
+  position: absolute;
+  display: block;
+  width: 260px;
+  height: 96px;
+  border: 1px solid rgba(89,215,198,.16);
+  border-radius: 50%;
+  transform: rotateX(68deg) rotateZ(-16deg);
+}
+.depth-ring.r1 { right: -80px; bottom: 9%; }
+.depth-ring.r2 { left: -90px; top: 14%; transform: rotateX(68deg) rotateZ(23deg); }
+
+/* Floating 3D data slabs */
+.depth-slab {
+  position: absolute;
+  width: 190px;
+  height: 112px;
+  border: 1px solid rgba(112,145,230,.16);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(79,124,255,.035), rgba(89,215,198,.02));
+  box-shadow: 0 22px 50px rgba(0,0,0,.10);
+  transform: rotateX(62deg) rotateZ(-22deg);
+  animation: depthFloat 10s ease-in-out infinite;
+}
+.depth-slab.s1 { right: 4%; top: 11%; }
+.depth-slab.s2 { right: 10%; top: 18%; animation-delay: -2s; opacity: .7; }
+.depth-slab.s3 { right: 16%; top: 25%; animation-delay: -4s; opacity: .45; }
+
+/* Orbital geometry */
+.depth-orbit {
+  position: absolute;
+  display: block;
+  border: 1px solid rgba(112,145,230,.16);
+  border-radius: 50%;
+}
+.depth-orbit.o1 {
+  width: 330px; height: 120px;
+  right: -60px; top: 18%;
+  transform: rotate(-18deg);
+}
+.depth-orbit.o2 {
+  width: 250px; height: 250px;
+  right: 10px; top: 9%;
+  border-color: rgba(89,215,198,.12);
+  transform: rotate(28deg);
+}
+.depth-dot {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #7898ff;
+  box-shadow: 0 0 18px rgba(120,152,255,.5);
+}
+.depth-dot.d1 { right: 15%; top: 18%; animation: dotPulse 4s ease-in-out infinite; }
+.depth-dot.d2 { right: 5%; top: 31%; background: #59d7c6; animation: dotPulse 5s ease-in-out infinite reverse; }
+
+@keyframes depthCubeSpin {
+  from { transform: rotateX(-18deg) rotateY(0deg) rotateZ(9deg); }
+  to { transform: rotateX(342deg) rotateY(360deg) rotateZ(369deg); }
+}
+@keyframes depthFloat {
+  0%,100% { transform: rotateX(62deg) rotateZ(-22deg) translateY(0); }
+  50% { transform: rotateX(62deg) rotateZ(-22deg) translateY(-14px); }
+}
+@keyframes dotPulse {
+  0%,100% { opacity:.35; transform:scale(.8); }
+  50% { opacity:1; transform:scale(1.25); }
+}
+
+@media (max-width: 760px) {
+  .depth-scene { opacity: .30; }
+  .depth-cube.c1 { right: -26px; top: 10%; }
+  .depth-cube.c2 { display: none; }
+  .depth-slab { width: 135px; height: 82px; }
+  .depth-orbit.o1, .depth-orbit.o2 { right: -140px; }
+}
