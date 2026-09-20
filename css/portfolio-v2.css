@@ -1,11 +1,11 @@
 :root {
   --bg: #07111f;
   --bg-2: #0b1727;
-  --ink: #101828;
-  --muted: #667085;
-  --line: #e6eaf0;
-  --soft: #f5f7fb;
-  --card: #ffffff;
+  --ink: #182231;
+  --muted: #5f6d7f;
+  --line: #d6dee8;
+  --soft: #e7edf3;
+  --card: #f7f9fb;
   --accent: #4f7cff;
   --accent-2: #59d7c6;
   --accent-3: #9b8cff;
@@ -19,7 +19,7 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   color: var(--ink);
-  background: #fff;
+  background: #edf2f6;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -175,7 +175,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 .btn-ghost-v2 { color:#fff; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.055); }
 .btn-dark-v2 { color:#fff; background:#101828; }
-.btn-outline-v2 { border:1px solid #ccd4df; color:#233044; background:#fff; }
+.btn-outline-v2 { border:1px solid #c7d0dc; color:#233044; background:#f6f8fa; }
 
 .hero-visual { position:relative; height: 590px; }
 #hero3d { position:absolute; inset:0; width:100%; height:100%; }
@@ -203,8 +203,24 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .signal strong { display:block; font-family:"Space Grotesk",sans-serif; font-size:1.35rem; letter-spacing:-.03em; }
 .signal span { display:block; margin-top:3px; color:#8799b2; font-size:.77rem; }
 
-.section-v2 { padding: 112px 0; }
-.section-soft { background:var(--soft); }
+.section-v2 {
+  padding: 112px 0;
+  background: #f1f4f7;
+}
+#about {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(79,124,255,.055), transparent 26%),
+    linear-gradient(180deg, #eef2f6 0%, #f4f6f8 100%);
+}
+#work {
+  background:
+    radial-gradient(circle at 86% 14%, rgba(89,215,198,.045), transparent 24%),
+    #edf2f6;
+}
+#experience {
+  background: #f4f6f8;
+}
+.section-soft { background:linear-gradient(180deg,#e8edf2,#edf1f5); }
 .section-dark { color:#fff; background:var(--bg); }
 .section-head { max-width:780px; margin-bottom:48px; }
 .kicker { color:#4772e6; font-size:.72rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
@@ -251,7 +267,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   min-height:270px; padding:28px;
   border:1px solid var(--line);
   border-radius:var(--radius);
-  background:#fff;
+  background:linear-gradient(180deg,#f8fafc,#f1f4f7);
   box-shadow:0 12px 35px rgba(15,23,42,.055);
   transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
 }
@@ -297,7 +313,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .project-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
 .work-card {
   display:flex; flex-direction:column; min-height:330px; padding:25px;
-  border:1px solid var(--line); border-radius:20px; background:#fff;
+  border:1px solid var(--line); border-radius:20px; background:linear-gradient(180deg,#f8fafc,#f2f5f8);
   box-shadow:0 10px 30px rgba(15,23,42,.045);
   transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
 }
@@ -469,4 +485,59 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .research-orbit { width:300px; height:300px; right:-150px; top:58%; }
   .research-feature { grid-template-columns:1fr; gap:8px; }
   .research-index { font-size:1.3rem; }
+}
+
+
+/* SOLPIENT 3D research history */
+.solpient-visual {
+  position: relative;
+  min-height: 430px;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 22px;
+}
+#solpient3d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: .75;
+  pointer-events: none;
+}
+.solpient-visual .architecture {
+  position: relative;
+  z-index: 2;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(7,17,31,.40), rgba(7,17,31,.58));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.solpient-visual-note {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  z-index: 2;
+  color: #6f829c;
+  font-size: .66rem;
+  letter-spacing: .06em;
+}
+
+
+/* Softer light surfaces */
+.about-icon,
+.cap-icon,
+.work-icon {
+  background: #e6ebf2;
+  color: #3f62be;
+}
+.cap-card,
+.work-card,
+.timeline-item,
+.research-feature {
+  border-color: #d4dce6;
+}
+.cap-card:hover,
+.work-card:hover {
+  border-color: #aebfe9;
 }
