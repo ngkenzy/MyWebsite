@@ -60,6 +60,30 @@
     }, { passive: true });
   }
 
+  const gallery = document.getElementById("gallery");
+  const galleryTrigger = document.querySelector(".gallery-trigger");
+  const galleryClose = document.querySelector(".gallery-close");
+
+  const setGallery = (open) => {
+    if (!gallery || !galleryTrigger) return;
+    gallery.classList.toggle("is-open", open);
+    gallery.setAttribute("aria-hidden", String(!open));
+    galleryTrigger.setAttribute("aria-expanded", String(open));
+    if (open) {
+      setTimeout(() => gallery.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+    }
+  };
+
+  if (galleryTrigger) {
+    galleryTrigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      setGallery(!gallery.classList.contains("is-open"));
+    });
+  }
+  if (galleryClose) {
+    galleryClose.addEventListener("click", () => setGallery(false));
+  }
+
   const holder = document.getElementById("hero3d");
   if (!holder || !window.THREE || reduced) return;
 
