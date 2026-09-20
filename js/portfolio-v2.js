@@ -48,6 +48,18 @@
     });
   }
 
+  if (!reduced && window.matchMedia("(pointer:fine)").matches) {
+    const depthScenes = [...document.querySelectorAll(".depth-scene")];
+    window.addEventListener("pointermove", (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5);
+      const y = (e.clientY / window.innerHeight - 0.5);
+      depthScenes.forEach((scene, i) => {
+        const strength = 9 + (i % 3) * 4;
+        scene.style.transform = `translate3d(${x * strength}px, ${y * strength}px, 0)`;
+      });
+    }, { passive: true });
+  }
+
   const holder = document.getElementById("hero3d");
   if (!holder || !window.THREE || reduced) return;
 
