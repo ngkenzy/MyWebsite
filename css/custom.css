@@ -623,3 +623,137 @@ p.social a.blog i {
   color: #fff !important;
   font-size: 17px;
 }
+
+
+/* 2026 portfolio refresh */
+:root {
+  --portfolio-ink: #18202a;
+  --portfolio-muted: #667085;
+  --portfolio-surface: #ffffff;
+  --portfolio-soft: #f6f8fb;
+  --portfolio-accent: #2457d6;
+  --portfolio-border: #e5e9f0;
+}
+
+body {
+  color: var(--portfolio-ink);
+  background: var(--portfolio-surface);
+}
+
+section.text {
+  padding-top: 110px;
+  padding-bottom: 110px;
+}
+
+.hero-subtitle {
+  max-width: 760px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-actions .btn {
+  min-width: 140px;
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+nav.navbar a.nav-link {
+  font-style: normal;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.heading {
+  letter-spacing: 0.08em;
+}
+
+.project-card {
+  border: 1px solid var(--portfolio-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(24, 32, 42, 0.07);
+}
+
+.project-card:hover {
+  border-color: rgba(36, 87, 214, 0.35);
+  box-shadow: 0 18px 45px rgba(24, 32, 42, 0.12);
+}
+
+.project-card-featured {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7ff 100%);
+  border-color: rgba(36, 87, 214, 0.28);
+}
+
+.project-badge {
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: #e8efff;
+  color: #214ebc;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.project-card h5 {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.project-card p {
+  color: var(--portfolio-muted);
+}
+
+.key-highlights {
+  padding: 10px 0;
+}
+
+.highlight-item {
+  border-bottom-color: var(--portfolio-border);
+}
+
+.highlight-item:hover {
+  transform: none;
+  padding-left: 0;
+}
+
+.technology-badges {
+  color: #354052;
+  opacity: 0.84;
+}
+
+@media (max-width: 768px) {
+  section.text {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .retirement-countdown {
+    display: none;
+  }
+}
