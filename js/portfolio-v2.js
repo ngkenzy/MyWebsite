@@ -180,4 +180,83 @@
     requestAnimationFrame(animate);
   };
   requestAnimationFrame(animate);
+
+  const solHolder = document.getElementById("solpient3d");
+  if (solHolder) {
+    const solScene = new THREE.Scene();
+    const solCamera = new THREE.PerspectiveCamera(42, 1, 0.1, 50);
+    solCamera.position.set(4.8, 3.5, 6.2);
+    solCamera.lookAt(0, 0, 0);
+
+    const solRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    solRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    solRenderer.setClearColor(0x000000, 0);
+    solHolder.appendChild(solRenderer.domElement);
+
+    const stack = new THREE.Group();
+    stack.rotation.x = -0.16;
+    stack.rotation.y = -0.42;
+    solScene.add(stack);
+
+    const layerColors = [0x3659b8, 0x456bd2, 0x527ce7, 0x5b92dd, 0x59b9bd, 0x59d7c6];
+
+    for (let i = 0; i < 6; i++) {
+      const width = 3.8 - i * 0.12;
+      const depth = 2.15 - i * 0.06;
+      const geo = new THREE.BoxGeometry(width, 0.08, depth);
+      const mat = new THREE.MeshBasicMaterial({
+        color: layerColors[i],
+        transparent: true,
+        opacity: 0.055 + i * 0.008
+      });
+      const layer = new THREE.Mesh(geo, mat);
+      layer.position.y = (i - 2.5) * 0.36;
+      layer.position.x = i * 0.05;
+      layer.position.z = -i * 0.06;
+      stack.add(layer);
+
+      const edgeGeo = new THREE.EdgesGeometry(geo);
+      const edgeMat = new THREE.LineBasicMaterial({
+        color: layerColors[i],
+        transparent: true,
+        opacity: 0.34
+      });
+      const edges = new THREE.LineSegments(edgeGeo, edgeMat);
+      edges.position.copy(layer.position);
+      stack.add(edges);
+    }
+
+    const nodeGeo = new THREE.SphereGeometry(0.045, 10, 10);
+    const nodeMat = new THREE.MeshBasicMaterial({ color: 0x9bded4 });
+    for (let i = 0; i < 18; i++) {
+      const n = new THREE.Mesh(nodeGeo, nodeMat);
+      n.position.set(
+        -1.55 + Math.random() * 3.1,
+        -0.8 + Math.random() * 1.6,
+        -0.85 + Math.random() * 1.7
+      );
+      n.material = nodeMat.clone();
+      n.material.transparent = true;
+      n.material.opacity = 0.45 + Math.random() * 0.4;
+      stack.add(n);
+    }
+
+    const solResize = () => {
+      const w = Math.max(solHolder.clientWidth, 300);
+      const h = Math.max(solHolder.clientHeight, 360);
+      solRenderer.setSize(w, h, false);
+      solCamera.aspect = w / h;
+      solCamera.updateProjectionMatrix();
+    };
+    solResize();
+    window.addEventListener("resize", solResize);
+
+    const animateSolpient = (t) => {
+      stack.rotation.y = -0.42 + Math.sin(t * 0.00022) * 0.09;
+      stack.position.y = Math.sin(t * 0.0007) * 0.05;
+      solRenderer.render(solScene, solCamera);
+      requestAnimationFrame(animateSolpient);
+    };
+    requestAnimationFrame(animateSolpient);
+  }
 })();
