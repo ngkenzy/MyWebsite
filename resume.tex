@@ -1,6 +1,6 @@
 \documentclass[a4paper,10pt]{article}
 
-\usepackage[margin=0.68in]{geometry}
+\usepackage[margin=0.55in]{geometry}
 \usepackage{enumitem}
 \usepackage{titlesec}
 \usepackage{xcolor}
@@ -8,101 +8,78 @@
 \usepackage{parskip}
 
 \definecolor{heading}{HTML}{1F2937}
-\definecolor{muted}{HTML}{4B5563}
-
-\titleformat{\section}
-  {\bfseries\large\color{heading}}
-  {}
-  {0em}
-  {}
-  [\vspace{0.3em}\titlerule]
-
-\setlist[itemize]{leftmargin=1.15em,nosep,topsep=2pt}
+\titleformat{\section}{\bfseries\normalsize\color{heading}}{}{0em}{}[\vspace{0.12em}\titlerule]
+\titlespacing*{\section}{0pt}{5pt}{3pt}
+\setlist[itemize]{leftmargin=1.05em,nosep,topsep=1pt,itemsep=0pt,parsep=0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
 
 \begin{document}
 \pagestyle{empty}
 
 \begin{center}
-    {\LARGE\bfseries Phuoc H. Nguyen}\\[4pt]
-    Operations Research \textbar\ Data Systems \textbar\ Applied AI\\[4pt]
+    {\LARGE\bfseries Phuoc H. Nguyen}\\[2pt]
+    Operations Research \textbar\ Data Systems \textbar\ Applied AI\\[2pt]
     \href{mailto:ngkenzy@gmail.com}{ngkenzy@gmail.com} \textbar\
     (813) 508-0102 \textbar\
-    \href{https://phnguyen.com}{phnguyen.com}\\
+    \href{https://phnguyen.com}{phnguyen.com} \textbar\
     \href{https://github.com/ngkenzy}{github.com/ngkenzy} \textbar\
-    \href{https://linkedin.com/in/phuoc-nguyen-7634b25}{linkedin.com/in/phuoc-nguyen-7634b25}
+    \href{https://linkedin.com/in/phuoc-nguyen-7634b25}{LinkedIn}
 \end{center}
+
+\small
 
 \section*{Summary}
 Operations Research Analyst with 16+ years of Army and DoD experience in analytics, modeling, data systems, and decision support. Currently building decision support capabilities at USARD. Published AI researcher, founder and builder of SOLPIENT Research, and TS/SCI cleared.
 
 \section*{Core Skills}
-\textbf{Analytics:} Operations research, statistical modeling, simulation, predictive analytics, decision support \\
-\textbf{Data \& Engineering:} Python, SQL, R, Spark, ETL, APIs, data pipelines, automation \\
-\textbf{Platforms:} AWS, Databricks, Docker, Git \\
-\textbf{Applied AI:} LLM workflows, NLP, AI evaluation, intelligent agents
+\textbf{Analytics:} Operations research, statistical modeling, simulation, predictive analytics, decision support \textbar\
+\textbf{Engineering:} Python, SQL, R, Spark, ETL, APIs, automation \textbar\
+\textbf{Platforms:} AWS, Databricks, Docker, Git \textbar\
+\textbf{AI:} LLM workflows, NLP, AI evaluation, agents
 
 \section*{Experience}
 
-\noindent\textbf{Operations Research and Data Systems} \hfill \textit{Aug 2026 to Present} \\
-USARD
+\textbf{Operations Research and Data Systems, USARD} \hfill \textit{Aug 2026 to Present}
 \begin{itemize}
-    \item Build the Decision Support Platform and related analytics for operational decision making.
-    \item Develop data systems, analytical workflows, and decision support tools for recurring mission requirements.
-    \item Apply operations research, statistics, and automation to improve how leaders use data.
+    \item Build the Decision Support Platform, analytical workflows, and data systems for operational decision making.
+    \item Apply operations research, statistics, and automation to recurring mission requirements.
 \end{itemize}
 
-\noindent\textbf{Data Operations Projects Lead / Data Scientist} \hfill \textit{Jul 2024 to Jul 2026} \\
-DoD Chief Digital \& Artificial Intelligence Office (CDAO), Pentagon, Washington, D.C.
+\textbf{Data Operations Projects Lead / Data Scientist, DoD CDAO} \hfill \textit{Jul 2024 to Jul 2026}
 \begin{itemize}
     \item Led DataOps work supporting decision support analytics for Joint Staff and Army senior leaders.
     \item Built and integrated secure data pipelines and analytics across multiple classification environments.
-    \item Coordinated data platform, governance, and cloud integration efforts with mission and technical stakeholders.
 \end{itemize}
 
-\noindent\textbf{Lead Operations Research Analyst} \hfill \textit{Sep 2021 to Jul 2024} \\
-Army Futures Command, The Research and Analysis Center, Fort Leavenworth, KS
+\textbf{Lead Operations Research Analyst, Army Futures Command / TRAC} \hfill \textit{Sep 2021 to Jul 2024}
 \begin{itemize}
-    \item Led predictive analytics, simulation, and statistical studies supporting Army modernization.
-    \item Assessed force structure, readiness, and future concepts through wargaming and quantitative analysis.
-    \item Delivered analysis for senior Army and congressional stakeholders.
+    \item Led predictive analytics, simulation, and statistical studies supporting Army modernization and force design.
+    \item Delivered quantitative analysis for senior Army and congressional stakeholders.
 \end{itemize}
 
-\noindent\textbf{Cryptologic Officer} \hfill \textit{Jun 2018 to Sep 2021} \\
-National Security Agency / U.S. Central Command
+\textbf{Cryptologic Officer, NSA / U.S. Central Command} \hfill \textit{Jun 2018 to Sep 2021}
 \begin{itemize}
-    \item Led intelligence and data teams supporting joint operational requirements.
-    \item Improved collaboration and data sharing between NSA and CENTCOM mission partners.
+    \item Led intelligence and data teams supporting joint operational requirements and mission partner data sharing.
 \end{itemize}
 
-\noindent\textbf{Intelligence and Electronic Warfare Officer} \hfill \textit{2011 to 2018} \\
-U.S. Army
+\textbf{Intelligence and Electronic Warfare Officer, U.S. Army} \hfill \textit{2011 to 2018}
 \begin{itemize}
     \item Supported cyber, SIGINT, electronic warfare, and all source intelligence missions in joint and forward environments.
 \end{itemize}
 
 \section*{Selected Work}
-
-\textbf{SOLPIENT Research} \textbar\ Founder \& Builder \\
-Point in time investment research system that preserves each thesis, tracks new evidence, and compares later outcomes with prior assumptions.
-\href{https://solpient-research-app.vercel.app/}{Live Site} \textbar\
-\href{https://github.com/ngkenzy/solpient-research}{GitHub}
-
-\textbf{Mission Tailor AI} \\
-Built a context aware multimodal threat detection prototype during the NDIA Hackathon 2025. Tied for second and awarded third.
-
-\textbf{AI Text Summarization Research} \\
-Published research evaluating GPT generated summaries and bias.
-\href{http://arxiv.org/abs/2405.04053}{arXiv}
+\textbf{SOLPIENT Research, Founder \& Builder:} Point in time investment research system that preserves each thesis, tracks new evidence, and compares later outcomes with prior assumptions. \href{https://solpient-research-app.vercel.app/}{Live Site} \textbar\ \href{https://github.com/ngkenzy/solpient-research}{GitHub}\\
+\textbf{Mission Tailor AI:} Built a context aware multimodal threat detection prototype during the NDIA Hackathon 2025; tied for second and awarded third.\\
+\textbf{AI Text Summarization Research:} Published research evaluating GPT generated summaries and bias. \href{http://arxiv.org/abs/2405.04053}{arXiv}
 
 \section*{Education}
-\textbf{MS, Computer Science}, University of Colorado Boulder \hfill \textit{In progress} \\
-\textbf{MS, Applied Statistics, Analytics, and Data Science}, University of Kansas \\
-\textbf{MBA}, University of Kansas \\
+\textbf{MS, Computer Science}, University of Colorado Boulder (in progress) \textbar\
+\textbf{MS, Applied Statistics, Analytics, and Data Science}, University of Kansas \textbar\
+\textbf{MBA}, University of Kansas \textbar\
 \textbf{BS, Mathematics \& Economics}, Northern Illinois University
 
 \section*{Credentials}
-TS/SCI Security Clearance with CI Polygraph \textbar\
-CompTIA Security+ \textbar\
-Fluent Vietnamese
+TS/SCI Security Clearance with CI Polygraph \textbar\ CompTIA Security+ \textbar\ Fluent Vietnamese
 
 \end{document}
