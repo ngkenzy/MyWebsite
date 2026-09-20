@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Huệ Nhật Notes | Phuoc Nguyen</title>
+  <meta name="description" content="Huệ Nhật Notes is a clean, organized blog for useful reflections, dated notes, and calm thinking." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#home" class="brand" aria-label="Huệ Nhật Notes home">
+        <span class="brand-mark">日</span>
+        <span>
+          <strong>Huệ Nhật Notes</strong>
+          <small>dated reflections</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#write">Write</a>
+        <a href="#posts">Posts</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#guide">Framework</a>
+        <a href="https://docs.google.com/spreadsheets/d/1OTa4zu3NK91dU-pGCgYi0UC4GZooqRKsnrQqdbmB4Mo/edit?gid=1246163708#gid=1246163708" target="_blank" rel="noopener noreferrer">Finance</a>
+        <a href="stocks.html">Stocks</a>
+        <a href="../index.html">Professional Site</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Huệ Nhật Notes</p>
+          <h1>Record the day. Keep the lesson.</h1>
+          <p class="hero-text">
+            A quiet place for dated reflections, useful lessons, and calm thinking.
+          </p>
+          <div class="hero-actions compact-actions">
+            <a class="button primary" href="#write">Write</a>
+            <a class="button ghost" href="#posts">Read</a>
+            <a class="button ghost" href="../index.html">Professional Site</a>
+          </div>
+        </div>
+        <aside class="today-card" aria-label="Today summary">
+          <span class="muted">Today</span>
+          <strong id="todayDate">Loading...</strong>
+          <p id="todayPrompt">One thought. One lesson.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="write" class="section">
+      <div class="container two-column">
+        <div>
+          <p class="eyebrow">Draft</p>
+          <h2>Write the useful part.</h2>
+          <div class="compact-note">
+            Save locally. Export when ready.
+          </div>
+        </div>
+
+        <form id="postForm" class="editor-card">
+          <label for="postTitle">Title</label>
+          <input id="postTitle" type="text" placeholder="Example: Use your time well" required />
+
+          <div class="form-row">
+            <div>
+              <label for="postDate">Date</label>
+              <input id="postDate" type="date" required />
+            </div>
+            <div>
+              <label for="postCategory">Category</label>
+              <select id="postCategory">
+                <option>Reflection</option>
+                <option>Family</option>
+                <option>Learning</option>
+                <option>Travel</option>
+                <option>Health</option>
+                <option>Teaching</option>
+                <option>Draft</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="postBody">Post</label>
+          <textarea id="postBody" rows="12" placeholder="What happened? What did it teach you? What should remain?"></textarea>
+
+          <div class="editor-actions">
+            <button class="button primary" type="submit">Save note</button>
+            <button class="button ghost" type="button" id="exportDraft">Export .txt</button>
+            <button class="button ghost" type="button" id="restoreSeed">Restore curated posts</button>
+            <button class="button danger" type="button" id="clearEditor">Clear</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="posts" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Archive</p>
+            <h2>Notes by date</h2>
+          </div>
+          <div class="filters" aria-label="Post filters">
+            <button class="chip active" data-filter="All">All</button>
+            <button class="chip" data-filter="Reflection">Reflection</button>
+            <button class="chip" data-filter="Family">Family</button>
+            <button class="chip" data-filter="Learning">Learning</button>
+            <button class="chip" data-filter="Travel">Travel</button>
+            <button class="chip" data-filter="Teaching">Teaching</button>
+            <button class="chip" data-filter="Health">Health</button>
+          </div>
+        </div>
+        <div id="postList" class="post-list"></div>
+      </div>
+    </section>
+
+    <section id="calendar" class="section">
+      <div class="container calendar-grid">
+        <div>
+          <p class="eyebrow">Calendar</p>
+          <h2>Writing rhythm</h2>
+          <p class="section-text">
+            Days with saved notes are marked.
+          </p>
+          <div class="calendar-controls">
+            <button class="button ghost" id="prevMonth" type="button">←</button>
+            <strong id="calendarTitle">Month Year</strong>
+            <button class="button ghost" id="nextMonth" type="button">→</button>
+          </div>
+        </div>
+        <div class="calendar-card">
+          <div class="weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div id="calendarDays" class="calendar-days"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="guide" class="section alt">
+      <div class="container">
+        <div class="framework-header">
+          <div>
+            <p class="eyebrow">Operating Framework</p>
+            <h2>Three Focuses</h2>
+          </div>
+          <div class="framework-actions">
+            <button class="text-button" id="editFramework" type="button">Edit framework</button>
+            <button class="text-button hidden" id="saveFramework" type="button">Save</button>
+            <button class="text-button hidden" id="resetFramework" type="button">Reset</button>
+          </div>
+        </div>
+
+        <div id="frameworkContent" class="framework-content">
+          <p class="section-text">
+            These are the reminders behind the notes: do not cling, accept change, and act cleanly.
+            Edit this section anytime as your thinking becomes clearer.
+          </p>
+          <div class="principles-grid three-focus-grid">
+            <article>
+              <h3>Tín Tâm Minh</h3>
+              <p>Do not cling. Do not resist. Let the mind settle before choosing a response.</p>
+            </article>
+            <article>
+              <h3>Vô Thường</h3>
+              <p>Everything changes. Hold plans lightly and meet each season as it comes.</p>
+            </article>
+            <article>
+              <h3>Bát Chánh Đạo</h3>
+              <p>Act rightly. Live cleanly. Let daily conduct be the practice.</p>
+            </article>
+          </div>
+
+          <h2 class="subsection-title">Five Pillars</h2>
+          <div class="principles-grid five-pillars-grid">
+            <article>
+              <h3>Communication</h3>
+              <p>Clear, calm, brief. Practice simple stories, better listening, and words that reduce friction.</p>
+            </article>
+            <article>
+              <h3>Thinking</h3>
+              <p>Solve real problems only. Build useful technical skill, study consistently, and close open loops.</p>
+            </article>
+            <article>
+              <h3>Health</h3>
+              <p>Maintain the body. Walk, hike, lift, play, and keep the mind steady through practice.</p>
+            </article>
+            <article>
+              <h3>Finances</h3>
+              <p>Stay disciplined. No emotion, no chasing, no panic. Protect freedom through steady decisions.</p>
+            </article>
+            <article>
+              <h3>Family</h3>
+              <p>Be present, patient, and supportive. Guide without gripping. Love without rushing.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <p>© <span id="year"></span> Huệ Nhật Notes</p>
+      <div>
+        <a href="../index.html">Professional site</a>
+        <a href="https://github.com/ngkenzy" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/phuoc-nguyen-7634b25/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <template id="postTemplate">
+    <article class="post-card">
+      <div class="post-meta">
+        <span class="post-date"></span>
+        <span class="post-category"></span>
+      </div>
+      <h3 class="post-title"></h3>
+      <p class="post-excerpt"></p>
+      <div class="post-body"></div>
+      <div class="post-actions">
+        <button class="text-button read-post" type="button">Read</button>
+        <button class="text-button edit-post" type="button">Edit</button>
+        <button class="text-button export-post" type="button">Export</button>
+        <button class="text-button delete-post" type="button">Delete</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

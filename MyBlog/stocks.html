@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock Research Dashboard</title>
+  <style>
+    :root{
+      --bg:#f7f5ef;--panel:#fffdf8;--ink:#1f2933;--muted:#6b7280;--line:#e6dfd2;
+      --accent:#2f4f4f;--accent2:#4f6f6f;--green:#1f7a4d;--red:#a94442;--gold:#9a6b20;
+      --soft:#eef2ee;--shadow:0 14px 40px rgba(31,41,51,.08)
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+    header{position:sticky;top:0;z-index:20;background:rgba(247,245,239,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .topbar{max-width:1260px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand h1{font-size:20px;margin:0}.brand span{font-size:12px;color:var(--muted)}
+    main{max-width:1260px;margin:0 auto;padding:20px}.layout{display:grid;grid-template-columns:440px minmax(0,1fr);gap:18px;align-items:start}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow)}
+    .btn{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:9px 12px;text-decoration:none;font-size:13px;cursor:pointer;color:var(--accent)}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn.warn{color:var(--red)}.btn.small{padding:6px 9px;font-size:12px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.controls{display:grid;grid-template-columns:1fr 140px 130px;gap:8px;margin:12px 0}
+    input,select,textarea{width:100%;border:1px solid var(--line);border-radius:14px;padding:10px 11px;background:#fff;color:var(--ink);font:inherit}
+    textarea{min-height:520px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-size:13px;line-height:1.45}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:18px;background:var(--panel);max-height:70vh}table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle;white-space:nowrap}th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:#fbfaf6;position:sticky;top:0;z-index:1}
+    tr{cursor:pointer}tr:hover{background:#f2f0e8}tr.active{background:var(--soft)}.ticker{font-weight:800;color:var(--accent)}.company{font-size:12px;color:var(--muted)}.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:12px;background:#fbfaf6}.good{color:var(--green)}.bad{color:var(--red)}
+    .detail-header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px}.detail-header h2{margin:0;font-size:26px}.detail-header p{margin:4px 0 0;color:var(--muted)}
+    .meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.metric{border:1px solid var(--line);border-radius:14px;padding:10px;background:#fbfaf6}.metric span{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.metric strong{font-size:18px}
+    .analysis h2,.analysis h3{color:var(--ink)}.analysis h2{font-size:22px;margin:22px 0 10px}.analysis h3{font-size:17px;margin:16px 0 8px}.analysis p{margin:8px 0}.analysis table{font-size:13px;margin:10px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}.analysis th,.analysis td{white-space:normal}.analysis ul{padding-left:22px}.stock-meta{display:none!important}
+    .editor{display:none}.editing .editor{display:inline-block}.editing #analysisView{display:none}.editing #htmlEditor{display:block}#htmlEditor{display:none}.note{font-size:12px;color:var(--muted);margin:8px 0}.empty{padding:20px;color:var(--muted);text-align:center}.template-box{display:none;margin-top:12px}.show-template .template-box{display:block}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.meta-grid{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand"><h1>Stock Research Dashboard</h1><span>Paste one HTML block. The list updates from the metadata automatically.</span></div>
+    <div class="actions">
+      <button class="btn primary" id="addBtn">+ Add Stock</button>
+      <button class="btn primary" id="exportPageBtn">Export Updated Page</button>
+      <button class="btn" id="templateBtn">Show Template</button>
+      <button class="btn warn" id="resetBtn">Reset</button>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="layout">
+    <section class="card">
+      <h2 style="margin:0 0 6px;font-size:20px">Research List</h2>
+      <p class="note">This table is generated from each stock's <code>.stock-meta</code> block. Browser saves are private until you export and deploy the updated page.</p>
+      <div class="controls">
+        <input id="searchInput" placeholder="Search ticker or company..." />
+        <select id="sectorFilter"><option value="">All sectors</option></select>
+        <select id="sortSelect"><option value="rank">Sort by rank</option><option value="upside">Sort by upside</option><option value="score">Sort by score</option><option value="ticker">Sort by ticker</option></select>
+      </div>
+      <div class="table-wrap"><table id="stockTable"><thead><tr><th>Rank</th><th>Ticker</th><th>Sector</th><th>Price</th><th>Fair Value</th><th>Upside</th><th>Rating</th><th>Score</th></tr></thead><tbody></tbody></table></div>
+      <div class="template-box" id="templateBox">
+        <p class="note"><strong>Required:</strong> every pasted stock must include this hidden metadata block. The table reads these values.</p>
+        <textarea id="templateText" readonly></textarea>
+      </div>
+    </section>
+
+    <section class="card" id="detailCard">
+      <div class="detail-header">
+        <div><h2 id="detailTitle">No stock selected</h2><p id="detailThesis"></p></div>
+        <div class="actions">
+          <button class="btn" id="editBtn">Edit HTML</button>
+          <button class="btn primary editor" id="saveBtn">Save</button>
+          <button class="btn editor" id="cancelBtn">Cancel</button>
+          <button class="btn" id="copyBtn">Copy HTML</button>
+          <button class="btn" id="exportBtn">Export</button>
+          <button class="btn warn" id="deleteBtn">Delete</button>
+        </div>
+      </div>
+      <div class="meta-grid" id="metricGrid"></div>
+      <div id="analysisView" class="analysis"></div>
+      <textarea id="htmlEditor"></textarea>
+      <p class="note editor">Paste the full HTML block here, including the hidden <code>stock-meta</code> div. Click Save, then export the updated page when you want others to see it.</p>
+    </section>
+  </div>
+</main>
+
+<script>
+const STORAGE_KEY = 'nhatHue_stockDashboard_v3_blocks';
+
+const DEFAULT_BLOCKS = [`
+<article class="stock-analysis" id="ADBE-analysis">
+  <div class="stock-meta"
+    data-rank="1"
+    data-ticker="ADBE"
+    data-company="Adobe Inc."
+    data-sector="Technology"
+    data-industry="Software"
+    data-price="236.80"
+    data-market-cap="97300000000"
+    data-fair-value="400.00"
+    data-upside="68.9"
+    data-rating="Buy"
+    data-score="50"
+    data-forward-pe="10x"
+    data-risk="Moderate"
+    data-decision="Buy / Accumulate Carefully"
+    data-thesis="High-quality recurring software business trading at a compressed valuation because the market is uncertain about AI disruption, AI monetization, and CEO transition risk.">
+  </div>
+
+  <h2>Adobe Inc. (ADBE) — Full Investment Analysis</h2>
+  <p><strong>Current decision:</strong> Buy / Accumulate Carefully. Adobe remains a high-quality recurring software business with wide-moat characteristics, strong margins, high free cash flow conversion, and durable creative/professional workflow relevance. The stock appears undervalued if Adobe can defend its core creative franchise and convert AI usage into paid monetization.</p>
+
+  <h2>Section 1: Business Analysis</h2>
+  <table>
+    <thead><tr><th>Metric</th><th>Current View</th><th>Threshold</th><th>Signal</th></tr></thead>
+    <tbody>
+      <tr><td>P/E history vs current</td><td>Current multiple materially compressed versus Adobe's historical premium software valuation</td><td>Below historical average preferred</td><td>Bullish</td></tr>
+      <tr><td>PEG</td><td>Likely above 1 depending on growth estimate</td><td>&lt;1.0</td><td>Neutral</td></tr>
+      <tr><td>Debt / Equity</td><td>Manageable but distorted by buybacks and equity base</td><td>&lt;0.5</td><td>Neutral</td></tr>
+      <tr><td>Payout Ratio</td><td>No dividend</td><td>&lt;60%</td><td>Neutral</td></tr>
+      <tr><td>Gross Margin</td><td>Very high software margin</td><td>&gt;40%</td><td>Bullish</td></tr>
+      <tr><td>Net Margin</td><td>Strong net profitability</td><td>&gt;20%</td><td>Bullish</td></tr>
+      <tr><td>ROE</td><td>Strong</td><td>&gt;10%</td><td>Bullish</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Business model:</strong> Adobe sells subscription software across Creative Cloud, Document Cloud, and Experience Cloud. Revenue is highly recurring, software margins are strong, and customers include individuals, creators, agencies, enterprises, governments, educators, and large digital businesses.</p>
+  <p><strong>Moat:</strong> Adobe benefits from brand, workflow standardization, file-format familiarity, switching costs, professional ecosystem depth, and enterprise integration. The moat is wide but currently under test from AI-native creative tools.</p>
+  <p><strong>Business Quality Rating:</strong> Exceptional business quality, with moderate strategic risk from AI disruption and monetization uncertainty.</p>
+
+  <h2>Section 2: Financial Statement Analysis</h2>
+  <p><strong>Revenue:</strong> Adobe continues to grow from a large base, supported by subscription revenue and enterprise adoption. Growth has slowed compared with earlier cloud-transition years, but the model remains durable.</p>
+  <p><strong>Profitability:</strong> Gross margin, operating margin, and net margin remain elite for a mature software company.</p>
+  <p><strong>Cash flow:</strong> Adobe generates strong operating cash flow and free cash flow. Free cash flow conversion is one of the main reasons the business deserves a premium multiple.</p>
+  <p><strong>Balance sheet:</strong> Adobe has manageable debt and strong cash generation. The main balance-sheet issue is not solvency, but whether buybacks create value at the prices paid.</p>
+  <p><strong>Strengths:</strong> recurring revenue, high margins, global brand, deep product ecosystem, strong FCF.</p>
+  <p><strong>Weaknesses:</strong> AI uncertainty, slower growth, competitive pressure, CEO transition risk.</p>
+  <p><strong>Red flags:</strong> if AI features do not convert into higher ARR, or if low-cost AI tools erode Creative Cloud pricing power, the thesis weakens.</p>
+
+  <h2>Section 3: Enhanced Fundamental Scorecard</h2>
+  <table>
+    <thead><tr><th>#</th><th>Metric</th><th>Current Value</th><th>Desired Threshold</th><th>Explanation</th><th>Signal</th><th>Score</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Market Cap</td><td>~$97.3B</td><td>Reasonable vs FCF</td><td>Compressed versus historical Adobe valuation</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>2</td><td>P/E Ratio</td><td>Low-teens GAAP area</td><td>Below historical average</td><td>Cheap for Adobe if earnings quality holds</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>3</td><td>Forward P/E</td><td>~10x to low-teens depending EPS basis</td><td>Below quality software peers</td><td>Market pricing in major uncertainty</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>4</td><td>PEG Ratio</td><td>Above 1</td><td>&lt;1.0</td><td>Growth is not fast enough for a classic Lynch bargain</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>5</td><td>Debt-to-Equity</td><td>Manageable</td><td>&lt;0.50</td><td>Not a major solvency concern</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>6</td><td>Dividend Payout</td><td>0%</td><td>&lt;60%</td><td>No dividend; capital returned through buybacks</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>7</td><td>Dividend Growth</td><td>None</td><td>Consistent increases</td><td>Not an income stock</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>8</td><td>EPS Growth This Year</td><td>Positive but pressured by transition perception</td><td>Increasing</td><td>Needs continued execution</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>9</td><td>EPS Growth Next Year</td><td>Expected positive</td><td>Increasing</td><td>AI monetization and cost discipline matter</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>10</td><td>EPS Growth Past 5 Years</td><td>Strong long-term record</td><td>Positive CAGR</td><td>Adobe has compounded well</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>11</td><td>EPS Growth Next 5 Years</td><td>Moderate</td><td>Durable double-digit preferred</td><td>Depends on AI pricing and seat expansion</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>12</td><td>Current Ratio</td><td>Adequate</td><td>&gt;1.5</td><td>Liquidity acceptable</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>13</td><td>Quick Ratio</td><td>Adequate</td><td>&gt;0.5</td><td>Software business has low inventory needs</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>14</td><td>Gross Margin</td><td>Very high</td><td>&gt;40%</td><td>Excellent software economics</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>15</td><td>Net Margin</td><td>Strong</td><td>&gt;20%</td><td>High profitability</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>16</td><td>Long-Term Debt</td><td>Manageable</td><td>Stable/reducible</td><td>Debt is serviceable through FCF</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>17</td><td>Net Income Trend</td><td>Positive over time</td><td>Increasing</td><td>Profitable franchise</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>18</td><td>Retained Earnings</td><td>Impacted by buybacks</td><td>Increasing</td><td>Accounting less useful due to capital return</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>19</td><td>ROE</td><td>Strong</td><td>&gt;10%</td><td>High-return business</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>20</td><td>ROIC</td><td>Strong</td><td>&gt;10%</td><td>Asset-light economics</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>21</td><td>FCF Margin</td><td>High</td><td>High and stable</td><td>Core strength</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>22</td><td>FCF Growth</td><td>Positive but slower</td><td>Growing</td><td>Needs AI monetization</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>23</td><td>FCF Conversion</td><td>Strong</td><td>FCF / NI near or above 1</td><td>High-quality earnings</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>24</td><td>Buybacks</td><td>Material</td><td>Value-accretive</td><td>More attractive at depressed valuation</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>25</td><td>Insider Ownership</td><td>Modest</td><td>Higher preferred</td><td>Typical for large-cap software</td><td>Neutral</td><td>0</td></tr>
+      <tr><td>26</td><td>Moat</td><td>Wide</td><td>Wide moat</td><td>Brand, workflow, switching costs</td><td>Bullish</td><td>+1</td></tr>
+      <tr><td>27</td><td>Capital Allocation</td><td>B+</td><td>A preferred</td><td>Strong buybacks, but execution must be disciplined</td><td>Bullish</td><td>+1</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Section 4: Historical Valuation Analysis</h2>
+  <p>Adobe trades at a significant discount to its own historical valuation. Historically, the market paid a premium multiple for Adobe because of recurring revenue, margins, brand power, and high free cash flow. Today the market is applying a much lower multiple due to AI disruption fears, slower growth, and leadership transition uncertainty.</p>
+  <table><thead><tr><th>Period</th><th>Historical Avg Forward P/E</th><th>Current</th><th>Discount/Premium</th><th>Signal</th></tr></thead><tbody><tr><td>3-Year</td><td>Above current</td><td>~10x-low teens</td><td>Discount</td><td>Undervalued</td></tr><tr><td>5-Year</td><td>Above current</td><td>~10x-low teens</td><td>Large discount</td><td>Undervalued</td></tr><tr><td>10-Year</td><td>Above current</td><td>~10x-low teens</td><td>Large discount</td><td>Strongly undervalued if moat holds</td></tr></tbody></table>
+  <p><strong>Valuation Signal:</strong> Undervalued, potentially strongly undervalued if AI is additive rather than destructive.</p>
+
+  <h2>Section 5: Market Cap Analysis</h2>
+  <p>At roughly $97B market capitalization, Adobe is being valued more like a damaged mature software company than a wide-moat compounder. That may be justified if AI erodes pricing power. It is too pessimistic if Adobe preserves its creative workflow dominance and monetizes Firefly/AI credits across its installed base.</p>
+  <p><strong>Fairly valued market cap:</strong> approximately $150B–$180B. <strong>Undervalued below:</strong> roughly $120B if FCF remains resilient. <strong>Overvalued above:</strong> $220B+ unless growth reaccelerates.</p>
+
+  <h2>Section 6: Intrinsic Value Analysis</h2>
+  <table><thead><tr><th>Method</th><th>Fair Value / Share</th><th>Fair Market Cap</th></tr></thead><tbody><tr><td>DCF</td><td>$390–$430</td><td>$160B–$180B</td></tr><tr><td>Owner Earnings</td><td>$375–$425</td><td>$155B–$175B</td></tr><tr><td>Earnings Multiple</td><td>$360–$420</td><td>$148B–$172B</td></tr><tr><td>PEG</td><td>$300–$360</td><td>$123B–$148B</td></tr><tr><td>Industry Peers</td><td>$380–$440</td><td>$156B–$181B</td></tr><tr><td>Historical Multiple</td><td>$420–$500</td><td>$172B–$205B</td></tr></tbody></table>
+
+  <h2>Section 7: Fair Value Estimates</h2>
+  <table><thead><tr><th>Case</th><th>Fair Value / Share</th><th>Fair Market Cap</th><th>Upside / Downside From $236.80</th></tr></thead><tbody><tr><td>Low Case</td><td>$300</td><td>~$123B</td><td>~27%</td></tr><tr><td>Base Case</td><td>$400</td><td>~$164B</td><td>~69%</td></tr><tr><td>High Case</td><td>$500</td><td>~$205B</td><td>~111%</td></tr></tbody></table>
+
+  <h2>Section 8: Margin of Safety Analysis</h2>
+  <table><thead><tr><th>Margin of Safety</th><th>Buy Price</th><th>Market Cap Equivalent</th></tr></thead><tbody><tr><td>25%</td><td>$300</td><td>~$123B</td></tr><tr><td>35%</td><td>$260</td><td>~$107B</td></tr><tr><td>50%</td><td>$200</td><td>~$82B</td></tr></tbody></table>
+  <p><strong>Strong Buy Zone:</strong> below $260. <strong>Buy Zone:</strong> $260–$320. <strong>Fair Value Zone:</strong> $350–$430. <strong>Trim Zone:</strong> above $475 unless growth accelerates.</p>
+
+  <h2>Section 9: Industry & Competition</h2>
+  <p>Adobe competes with Canva, Figma, Microsoft, Google, OpenAI-enabled tools, generative AI startups, and specialized design/video/document platforms. The industry trend is moving from tool ownership to AI-assisted workflow ownership. Adobe's advantage is professional workflow depth; its threat is simpler AI-native creation tools that reduce the need for expert software.</p>
+  <p><strong>Competitive rank:</strong> Adobe remains #1 in professional creative software, strong in documents, and competitive in digital experience, but the AI layer is becoming more contested.</p>
+
+  <h2>Section 10: Risk Analysis</h2>
+  <ul><li><strong>AI risk:</strong> high strategic importance; moderate-to-high uncertainty.</li><li><strong>Competitive risk:</strong> moderate, especially from Canva, Figma-like workflows, and AI-native tools.</li><li><strong>Financial risk:</strong> low; balance sheet and cash flow are strong.</li><li><strong>Execution risk:</strong> moderate; Adobe must monetize AI without alienating users.</li><li><strong>Management risk:</strong> moderate due to leadership transition concern.</li></ul>
+  <p><strong>Overall Risk:</strong> Moderate.</p>
+
+  <h2>Section 11: Catalyst Analysis</h2>
+  <ul><li><strong>High impact:</strong> AI ARR disclosure, Firefly monetization, Creative Cloud retention, earnings beats.</li><li><strong>Medium impact:</strong> buyback acceleration, margin expansion, enterprise adoption of AI features.</li><li><strong>Low impact:</strong> small product launches unless tied to pricing or ARR.</li></ul>
+
+  <h2>Section 12: Warren Buffett Analysis</h2>
+  <p>Adobe has many Buffett-like qualities: high margins, recurring revenue, strong brand, pricing power, high returns on capital, and strong free cash flow. The less Buffett-like part is technological disruption risk. Buffett would likely admire the business but may demand a clear margin of safety because the AI threat is hard to underwrite.</p>
+  <p><strong>Buffett Score:</strong> 8 / 10. <strong>Would Buffett buy today?</strong> Possibly, if he believed the moat remains durable and the current price provides enough margin of safety.</p>
+
+  <h2>Section 13: Peter Lynch Analysis</h2>
+  <p><strong>Classification:</strong> Stalwart with possible re-rating upside. Adobe is not a fast grower anymore, but it is a strong business trading as if growth durability is impaired.</p>
+  <p><strong>Lynch Score:</strong> 7 / 10. Lynch may like the simple story if framed as: great software company, temporary fear, sticky customers, high cash flow, AI optionality. The PEG is not perfect, so it is not a textbook Lynch bargain.</p>
+
+  <h2>Section 14: Final Scorecard</h2>
+  <table><thead><tr><th>Category</th><th>Score</th></tr></thead><tbody><tr><td>Valuation</td><td>9 / 10</td></tr><tr><td>Financial Strength</td><td>8 / 10</td></tr><tr><td>Profitability</td><td>10 / 10</td></tr><tr><td>Growth</td><td>6 / 10</td></tr><tr><td>Management</td><td>7 / 10</td></tr><tr><td>Moat</td><td>10 / 10</td></tr><tr><td><strong>Total</strong></td><td><strong>50 / 60</strong></td></tr></tbody></table>
+  <p><strong>Interpretation:</strong> Strong Buy range by quality and valuation, but position sizing should reflect AI uncertainty.</p>
+
+  <h2>Section 15: Final Investment Decision</h2>
+  <p><strong>Current Stock Price:</strong> $236.80. <strong>Current Market Cap:</strong> ~$97.3B. <strong>Intrinsic Value Range:</strong> $300–$500. <strong>Base Fair Value:</strong> ~$400. <strong>25% MOS Buy Price:</strong> $300. <strong>35% MOS Buy Price:</strong> $260. <strong>50% MOS Buy Price:</strong> $200.</p>
+  <p><strong>Bull case:</strong> Adobe successfully monetizes AI, preserves Creative Cloud dominance, expands ARR, and returns to a premium multiple.</p>
+  <p><strong>Bear case:</strong> AI-native tools compress pricing, reduce seat growth, and permanently lower Adobe's multiple.</p>
+  <p><strong>Most likely scenario:</strong> Adobe remains a durable software compounder, but growth is slower and the market requires proof before re-rating.</p>
+  <p><strong>Expected annual return:</strong> 3 years: 12%–20%; 5 years: 10%–16%; 10 years: 8%–13%, assuming moat durability and continued buybacks.</p>
+  <p><strong>Recommended holding period:</strong> 5–10 years. <strong>Confidence:</strong> Medium-High. <strong>Final Rating:</strong> Buy / Accumulate Carefully.</p>
+  <p><strong>Would this qualify as a 10-year stock?</strong> Yes, but only if Adobe proves AI is additive to its ecosystem rather than destructive to its pricing power.</p>
+</article>
+`];
+
+const TEMPLATE = `<article class="stock-analysis" id="TICKER-analysis">
+  <div class="stock-meta"
+    data-rank="2"
+    data-ticker="TICKER"
+    data-company="Company Name"
+    data-sector="Technology"
+    data-industry="Software"
+    data-price="100.00"
+    data-market-cap="100000000000"
+    data-fair-value="150.00"
+    data-upside="50.0"
+    data-rating="Buy"
+    data-score="45"
+    data-forward-pe="20x"
+    data-risk="Moderate"
+    data-decision="Buy / Watch / Hold"
+    data-thesis="One-sentence investment thesis goes here.">
+  </div>
+
+  <h2>Company Name (TICKER) — Full Investment Analysis</h2>
+  <p><strong>Current decision:</strong> Your decision here.</p>
+  <h2>Section 1: Business Analysis</h2>
+  <p>Paste full analysis here.</p>
+</article>`;
+
+let blocks = loadBlocks();
+let stocks = [];
+let selectedTicker = null;
+let lastEditorTicker = null;
+
+function loadBlocks(){
+  try { const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (Array.isArray(saved) && saved.length) return saved; } catch(e) {}
+  return [...DEFAULT_BLOCKS];
+}
+function saveBlocks(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks)); }
+function parseBlock(html, index){
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const meta = doc.querySelector('.stock-meta');
+  if(!meta) return null;
+  const d = meta.dataset;
+  const ticker = (d.ticker || `STOCK${index+1}`).trim().toUpperCase();
+  const price = parseFloat(d.price || '');
+  const fair = parseFloat(d.fairValue || '');
+  let upside = d.upside !== undefined && d.upside !== '' ? parseFloat(d.upside) : NaN;
+  if(!Number.isFinite(upside) && Number.isFinite(price) && Number.isFinite(fair) && price !== 0) upside = ((fair-price)/price)*100;
+  return {
+    index,
+    html,
+    rank: parseInt(d.rank || index+1, 10),
+    ticker,
+    company: d.company || ticker,
+    sector: d.sector || 'Unclassified',
+    industry: d.industry || '—',
+    price: Number.isFinite(price) ? price : null,
+    marketCap: d.marketCap || '',
+    fairValue: Number.isFinite(fair) ? fair : null,
+    upside: Number.isFinite(upside) ? upside : null,
+    rating: d.rating || 'Watch',
+    score: d.score || '—',
+    forwardPe: d.forwardPe || '—',
+    risk: d.risk || '—',
+    decision: d.decision || '',
+    thesis: d.thesis || ''
+  };
+}
+function rebuildStocks(){
+  stocks = blocks.map(parseBlock).filter(Boolean);
+  stocks.sort((a,b)=>a.rank-b.rank || a.ticker.localeCompare(b.ticker));
+  if(!selectedTicker && stocks.length) selectedTicker = stocks[0].ticker;
+  if(selectedTicker && !stocks.find(s=>s.ticker===selectedTicker)) selectedTicker = stocks[0]?.ticker || null;
+  buildSectorFilter();
+}
+function fmtMoney(v){ if(v===null || v===undefined || v==='') return '—'; return '$' + Number(v).toLocaleString(undefined,{minimumFractionDigits: v<1000?2:0, maximumFractionDigits: v<1000?2:0}); }
+function fmtCap(v){ const n=parseFloat(v); if(!Number.isFinite(n)) return v || '—'; if(n>=1e12) return '$'+(n/1e12).toFixed(2)+'T'; if(n>=1e9) return '$'+(n/1e9).toFixed(1)+'B'; if(n>=1e6) return '$'+(n/1e6).toFixed(1)+'M'; return '$'+n.toLocaleString(); }
+function fmtPct(v){ return v===null || v===undefined ? '—' : (v>=0?'+':'') + v.toFixed(1) + '%'; }
+function scoreText(s){ return s.score==='—' ? '— / 60' : String(s.score).includes('/') ? s.score : s.score + ' / 60'; }
+function buildSectorFilter(){
+  const sel=document.getElementById('sectorFilter'); const current=sel.value;
+  const sectors=[...new Set(stocks.map(s=>s.sector).filter(Boolean))].sort();
+  sel.innerHTML='<option value="">All sectors</option>' + sectors.map(s=>`<option value="${escapeAttr(s)}">${escapeHtml(s)}</option>`).join('');
+  if(sectors.includes(current)) sel.value=current;
+}
+function visibleStocks(){
+  const q=document.getElementById('searchInput').value.trim().toLowerCase();
+  const sector=document.getElementById('sectorFilter').value;
+  const sort=document.getElementById('sortSelect').value;
+  let out=stocks.filter(s=>{
+    const hay=`${s.ticker} ${s.company} ${s.sector} ${s.industry} ${s.rating}`.toLowerCase();
+    return (!q || hay.includes(q)) && (!sector || s.sector===sector);
+  });
+  if(sort==='upside') out.sort((a,b)=>(b.upside??-999)-(a.upside??-999));
+  if(sort==='score') out.sort((a,b)=>(parseFloat(b.score)||-1)-(parseFloat(a.score)||-1));
+  if(sort==='ticker') out.sort((a,b)=>a.ticker.localeCompare(b.ticker));
+  if(sort==='rank') out.sort((a,b)=>a.rank-b.rank);
+  return out;
+}
+function renderTable(){
+  const tbody=document.querySelector('#stockTable tbody');
+  const rows=visibleStocks();
+  if(!rows.length){ tbody.innerHTML='<tr><td colspan="8" class="empty">No stocks found.</td></tr>'; return; }
+  tbody.innerHTML=rows.map(s=>`<tr data-ticker="${escapeAttr(s.ticker)}" class="${s.ticker===selectedTicker?'active':''}">
+    <td>${s.rank}</td>
+    <td><div class="ticker">${escapeHtml(s.ticker)}</div><div class="company">${escapeHtml(s.company)}</div></td>
+    <td>${escapeHtml(s.sector)}<div class="company">${escapeHtml(s.industry)}</div></td>
+    <td>${fmtMoney(s.price)}</td><td>${fmtMoney(s.fairValue)}</td>
+    <td class="${(s.upside??0)>=0?'good':'bad'}">${fmtPct(s.upside)}</td>
+    <td><span class="badge">${escapeHtml(s.rating)}</span></td><td>${escapeHtml(scoreText(s))}</td>
+  </tr>`).join('');
+  tbody.querySelectorAll('tr[data-ticker]').forEach(tr=>tr.addEventListener('click',()=>{ selectedTicker=tr.dataset.ticker; exitEdit(); renderAll(); }));
+}
+function renderDetail(){
+  const s=stocks.find(x=>x.ticker===selectedTicker);
+  if(!s){ document.getElementById('detailTitle').textContent='No stock selected'; document.getElementById('analysisView').innerHTML='<div class="empty">Add a stock analysis block to begin.</div>'; document.getElementById('metricGrid').innerHTML=''; return; }
+  document.getElementById('detailTitle').textContent=`${s.company} (${s.ticker})`;
+  document.getElementById('detailThesis').textContent=s.thesis || s.decision || '';
+  document.getElementById('metricGrid').innerHTML=`
+    <div class="metric"><span>Decision</span><strong>${escapeHtml(s.decision || s.rating)}</strong></div>
+    <div class="metric"><span>Price</span><strong>${fmtMoney(s.price)}</strong></div>
+    <div class="metric"><span>Fair Value</span><strong>${fmtMoney(s.fairValue)}</strong></div>
+    <div class="metric"><span>Upside</span><strong class="${(s.upside??0)>=0?'good':'bad'}">${fmtPct(s.upside)}</strong></div>
+    <div class="metric"><span>Market Cap</span><strong>${fmtCap(s.marketCap)}</strong></div>
+    <div class="metric"><span>Score</span><strong>${escapeHtml(scoreText(s))}</strong></div>
+    <div class="metric"><span>Forward P/E</span><strong>${escapeHtml(s.forwardPe)}</strong></div>
+    <div class="metric"><span>Risk</span><strong>${escapeHtml(s.risk)}</strong></div>`;
+  document.getElementById('analysisView').innerHTML=s.html;
+  document.getElementById('htmlEditor').value=s.html.trim();
+}
+function renderAll(){ rebuildStocks(); renderTable(); renderDetail(); saveBlocks(); }
+function enterEdit(){ document.getElementById('detailCard').classList.add('editing'); const s=stocks.find(x=>x.ticker===selectedTicker); lastEditorTicker=s?.ticker || null; if(s) document.getElementById('htmlEditor').value=s.html.trim(); }
+function exitEdit(){ document.getElementById('detailCard').classList.remove('editing'); }
+function saveEditor(){
+  const html=document.getElementById('htmlEditor').value.trim();
+  const parsed=parseBlock(html,0);
+  if(!parsed){ alert('This HTML block needs a <div class="stock-meta" ...></div> metadata block.'); return; }
+  const oldIndex=stocks.find(s=>s.ticker===lastEditorTicker)?.index;
+  const sameTickerIndex=stocks.find(s=>s.ticker===parsed.ticker)?.index;
+  const idx = Number.isInteger(oldIndex) ? oldIndex : (Number.isInteger(sameTickerIndex) ? sameTickerIndex : blocks.length);
+  blocks[idx]=html;
+  selectedTicker=parsed.ticker;
+  exitEdit();
+  renderAll();
+}
+function addStock(){
+  const html=prompt('Paste the complete stock analysis HTML block here, including the stock-meta div:');
+  if(!html) return;
+  const parsed=parseBlock(html.trim(), blocks.length);
+  if(!parsed){ alert('No stock-meta block found. Use Show Template and include the metadata div.'); return; }
+  const existingIndex=stocks.find(s=>s.ticker===parsed.ticker)?.index;
+  if(Number.isInteger(existingIndex)) blocks[existingIndex]=html.trim(); else blocks.push(html.trim());
+  selectedTicker=parsed.ticker; renderAll();
+}
+function copyCurrent(){ const s=stocks.find(x=>x.ticker===selectedTicker); if(!s) return; navigator.clipboard.writeText(s.html); }
+function exportCurrent(){ const s=stocks.find(x=>x.ticker===selectedTicker); if(!s) return; const blob=new Blob([s.html],{type:'text/html'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${s.ticker}-analysis.html`; a.click(); URL.revokeObjectURL(a.href); }
+function exportUpdatedPage(){
+  saveBlocks();
+  const source = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const replacement = 'const DEFAULT_BLOCKS = ' + JSON.stringify(blocks, null, 2) + ';';
+  const updated = source.replace(/const DEFAULT_BLOCKS = \[[\s\S]*?\n\];/, replacement);
+  if(updated === source){
+    alert('Could not export the full page. Copy individual stock HTML blocks instead.');
+    return;
+  }
+  const blob = new Blob([updated], {type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'stocks.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  alert('Downloaded updated stocks.html. Upload/deploy that file so other people can see these stocks.');
+}
+function deleteCurrent(){ const s=stocks.find(x=>x.ticker===selectedTicker); if(!s) return; if(!confirm(`Delete ${s.ticker}?`)) return; blocks.splice(s.index,1); selectedTicker=null; renderAll(); }
+function resetAll(){ if(confirm('Reset to the default Adobe analysis? This clears saved stock blocks from this browser.')){ localStorage.removeItem(STORAGE_KEY); blocks=[...DEFAULT_BLOCKS]; selectedTicker='ADBE'; renderAll(); } }
+function escapeHtml(str){ return String(str??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+function escapeAttr(str){ return escapeHtml(str).replace(/'/g,'&#039;'); }
+
+function init(){
+  document.getElementById('templateText').value=TEMPLATE;
+  document.getElementById('searchInput').addEventListener('input',renderTable);
+  document.getElementById('sectorFilter').addEventListener('change',renderTable);
+  document.getElementById('sortSelect').addEventListener('change',renderTable);
+  document.getElementById('addBtn').addEventListener('click',addStock);
+  document.getElementById('exportPageBtn').addEventListener('click',exportUpdatedPage);
+  document.getElementById('templateBtn').addEventListener('click',()=>document.body.classList.toggle('show-template'));
+  document.getElementById('editBtn').addEventListener('click',enterEdit);
+  document.getElementById('saveBtn').addEventListener('click',saveEditor);
+  document.getElementById('cancelBtn').addEventListener('click',()=>{ exitEdit(); renderDetail(); });
+  document.getElementById('copyBtn').addEventListener('click',copyCurrent);
+  document.getElementById('exportBtn').addEventListener('click',exportCurrent);
+  document.getElementById('deleteBtn').addEventListener('click',deleteCurrent);
+  document.getElementById('resetBtn').addEventListener('click',resetAll);
+  renderAll();
+}
+init();
+</script>
+</body>
+</html>
