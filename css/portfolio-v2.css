@@ -957,3 +957,428 @@ body {
 @media (max-width: 480px) {
   .gallery-grid { grid-template-columns: 1fr; }
 }
+
+
+/* Ask Phuoc local AI */
+.sr-only {
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip:rect(0,0,0,0) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+}
+
+.ask-phuoc-launch {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1200;
+  display: grid;
+  grid-template-columns: 54px auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 164px;
+  padding: 10px 14px 10px 10px;
+  border: 1px solid rgba(132,160,236,.28);
+  border-radius: 18px;
+  background: rgba(9,20,33,.84);
+  color: #eef4fb;
+  box-shadow: 0 18px 50px rgba(0,0,0,.34), inset 0 0 0 1px rgba(255,255,255,.025);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  cursor: pointer;
+  transition: transform .22s ease, border-color .22s ease, background .22s ease;
+}
+.ask-phuoc-launch:hover {
+  transform: translateY(-3px);
+  border-color: rgba(139,173,255,.48);
+  background: rgba(12,27,44,.93);
+}
+.ask-phuoc-launch[aria-expanded="true"] {
+  border-color: rgba(89,215,198,.42);
+}
+.ask-phuoc-launch-copy {
+  display: grid;
+  text-align: left;
+  line-height: 1.1;
+}
+.ask-phuoc-launch-copy strong {
+  font-size: .82rem;
+  letter-spacing: -.01em;
+}
+.ask-phuoc-launch-copy small {
+  margin-top: 4px;
+  color: #7488a2;
+  font-size: .62rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.ask-phuoc-orb {
+  position: relative;
+  display: block;
+  width: 46px;
+  height: 46px;
+  perspective: 500px;
+  transform-style: preserve-3d;
+}
+.ask-phuoc-orb-core {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, #d8e3ff 0 8%, #8ba8ff 26%, #4b70da 55%, #173565 100%);
+  box-shadow:
+    0 0 20px rgba(91,130,232,.64),
+    0 0 38px rgba(89,215,198,.18),
+    inset -5px -7px 10px rgba(3,10,24,.45);
+  animation: askOrbPulse 3.2s ease-in-out infinite;
+}
+.ask-phuoc-orb-ring {
+  position: absolute;
+  left: 4px;
+  top: 15px;
+  width: 38px;
+  height: 14px;
+  border: 1px solid rgba(124,161,255,.52);
+  border-radius: 50%;
+  transform-style: preserve-3d;
+}
+.ask-phuoc-orb-ring.ring-a {
+  transform: rotateZ(-18deg) rotateX(66deg);
+  animation: askRingA 7s linear infinite;
+}
+.ask-phuoc-orb-ring.ring-b {
+  border-color: rgba(89,215,198,.34);
+  transform: rotateZ(48deg) rotateX(72deg);
+  animation: askRingB 9s linear infinite reverse;
+}
+
+.ask-phuoc-panel {
+  position: fixed;
+  top: 88px;
+  right: 24px;
+  bottom: 92px;
+  z-index: 1199;
+  width: min(390px, calc(100vw - 32px));
+  display: grid;
+  grid-template-rows: auto auto auto auto auto minmax(120px,1fr) auto auto;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid rgba(128,158,226,.24);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 88% 6%, rgba(79,124,255,.10), transparent 24%),
+    linear-gradient(180deg, rgba(15,27,42,.98), rgba(8,18,30,.985));
+  box-shadow: 0 30px 80px rgba(0,0,0,.44);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(28px) scale(.985);
+  transform-origin: bottom right;
+  transition: opacity .24s ease, transform .28s ease;
+}
+.ask-phuoc-panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+}
+.ask-phuoc-panel::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.45), transparent 55%);
+}
+
+.ask-phuoc-panel-head,
+.ask-phuoc-local-note,
+.ask-phuoc-model-card,
+.ask-phuoc-progress,
+.ask-phuoc-suggestions,
+.ask-phuoc-messages,
+.ask-phuoc-form,
+.ask-phuoc-foot {
+  position: relative;
+  z-index: 2;
+}
+
+.ask-phuoc-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.ask-phuoc-identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ask-phuoc-identity > div {
+  display: grid;
+}
+.ask-phuoc-identity strong {
+  color: #f2f6fb;
+  font-family: "Space Grotesk",sans-serif;
+  font-size: .94rem;
+}
+.ask-phuoc-identity span {
+  margin-top: 2px;
+  color: #7588a0;
+  font-size: .65rem;
+}
+.ask-phuoc-mini-orb {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #dbe5ff, #7798f5 32%, #2f56ad 62%, #112647);
+  box-shadow: 0 0 18px rgba(92,132,234,.48);
+}
+.ask-phuoc-close {
+  display:grid;
+  place-items:center;
+  width: 34px;
+  height: 34px;
+  border:1px solid #2a3e55;
+  border-radius:10px;
+  background:#142131;
+  color:#8fa2b9;
+  cursor:pointer;
+}
+
+.ask-phuoc-local-note {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding: 9px 10px;
+  border:1px solid rgba(89,215,198,.13);
+  border-radius:11px;
+  background:rgba(89,215,198,.04);
+  color:#8da5b9;
+  font-size:.67rem;
+}
+.ask-phuoc-local-note i { color:#71c8bd; }
+
+.ask-phuoc-model-card {
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:12px;
+  padding: 12px;
+  border:1px solid #26394f;
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+}
+.ask-phuoc-model-card > div { display:grid; }
+.ask-phuoc-model-card small {
+  margin-top:4px;
+  color:#667a93;
+  font-size:.61rem;
+  line-height:1.35;
+}
+.ask-phuoc-model-card button {
+  min-height:36px;
+  padding:0 11px;
+  border:1px solid #46628e;
+  border-radius:10px;
+  background:#1a2c45;
+  color:#c9d8f3;
+  font-size:.66rem;
+  font-weight:750;
+  cursor:pointer;
+}
+.ask-phuoc-model-card button:disabled {
+  opacity:.65;
+  cursor:default;
+}
+.ask-phuoc-status {
+  color:#a9b9cd;
+  font-size:.69rem;
+  font-weight:750;
+}
+.ask-phuoc-status.is-loading { color:#9eb7ff; }
+.ask-phuoc-status.is-ready { color:#7cd0c4; }
+.ask-phuoc-status.is-search { color:#c2b078; }
+
+.ask-phuoc-progress {
+  height:3px;
+  overflow:hidden;
+  border-radius:99px;
+  background:#17263a;
+  opacity:0;
+  transition:opacity .2s ease;
+}
+.ask-phuoc-progress.is-visible { opacity:1; }
+.ask-phuoc-progress span {
+  display:block;
+  width:2%;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#557df0,#59d7c6);
+  transition:width .16s ease;
+}
+
+.ask-phuoc-suggestions {
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+.ask-phuoc-suggestion {
+  padding:7px 9px;
+  border:1px solid #273b51;
+  border-radius:999px;
+  background:#111f30;
+  color:#8ea3bd;
+  font-size:.62rem;
+  cursor:pointer;
+  transition:border-color .2s ease,color .2s ease,background .2s ease;
+}
+.ask-phuoc-suggestion:hover {
+  border-color:#45638c;
+  color:#d3deed;
+  background:#17273b;
+}
+
+.ask-phuoc-messages {
+  min-height: 120px;
+  overflow-y:auto;
+  padding: 4px 3px 4px 0;
+  scrollbar-width:thin;
+  scrollbar-color:#31465f transparent;
+}
+.ask-phuoc-message {
+  display:flex;
+  margin: 8px 0;
+}
+.ask-phuoc-message.user { justify-content:flex-end; }
+.ask-phuoc-bubble {
+  max-width: 88%;
+  padding: 10px 11px;
+  border:1px solid #26394e;
+  border-radius:14px;
+  background:#101d2c;
+  color:#c7d2e0;
+  font-size:.72rem;
+  line-height:1.5;
+}
+.ask-phuoc-message.user .ask-phuoc-bubble {
+  border-color:#38527a;
+  background:#1c3150;
+  color:#edf3fb;
+  border-bottom-right-radius:5px;
+}
+.ask-phuoc-message.assistant .ask-phuoc-bubble {
+  border-bottom-left-radius:5px;
+}
+.ask-phuoc-message-text { white-space:pre-wrap; }
+.ask-phuoc-sources {
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:9px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.055);
+}
+.ask-phuoc-sources a {
+  padding:4px 6px;
+  border-radius:7px;
+  background:#18273a;
+  color:#8eabef;
+  text-decoration:none;
+  font-size:.56rem;
+  font-weight:700;
+}
+.ask-phuoc-inline-note {
+  margin-top:7px;
+  color:#6f829a;
+  font-size:.58rem;
+}
+
+.ask-phuoc-form {
+  display:grid;
+  grid-template-columns:1fr 40px;
+  gap:8px;
+  padding:7px;
+  border:1px solid #2b3e55;
+  border-radius:14px;
+  background:#0c1724;
+  transition:border-color .2s ease;
+}
+.ask-phuoc-form:focus-within { border-color:#48658f; }
+.ask-phuoc-form input {
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#eef4fb;
+  font:inherit;
+  font-size:.72rem;
+}
+.ask-phuoc-form input::placeholder { color:#5f7188; }
+.ask-phuoc-form button {
+  display:grid;
+  place-items:center;
+  width:40px;
+  height:36px;
+  border:0;
+  border-radius:10px;
+  background:#7898f5;
+  color:#08121f;
+  cursor:pointer;
+}
+.ask-phuoc-form button:disabled { opacity:.45; cursor:default; }
+.ask-phuoc-foot {
+  color:#596c83;
+  font-size:.56rem;
+  line-height:1.4;
+}
+
+@keyframes askOrbPulse {
+  0%,100% { transform:scale(.92); box-shadow:0 0 17px rgba(91,130,232,.52),0 0 32px rgba(89,215,198,.14),inset -5px -7px 10px rgba(3,10,24,.45); }
+  50% { transform:scale(1.05); box-shadow:0 0 25px rgba(91,130,232,.74),0 0 42px rgba(89,215,198,.22),inset -5px -7px 10px rgba(3,10,24,.45); }
+}
+@keyframes askRingA {
+  from { transform:rotateZ(-18deg) rotateX(66deg) rotateY(0deg); }
+  to { transform:rotateZ(342deg) rotateX(66deg) rotateY(360deg); }
+}
+@keyframes askRingB {
+  from { transform:rotateZ(48deg) rotateX(72deg) rotateY(0deg); }
+  to { transform:rotateZ(408deg) rotateX(72deg) rotateY(360deg); }
+}
+
+@media (max-width:760px) {
+  .ask-phuoc-launch {
+    right:14px;
+    bottom:14px;
+    min-width:0;
+    grid-template-columns:46px;
+    padding:8px;
+    border-radius:16px;
+  }
+  .ask-phuoc-launch-copy { display:none; }
+  .ask-phuoc-panel {
+    top:76px;
+    right:12px;
+    bottom:74px;
+    width:calc(100vw - 24px);
+    padding:15px;
+    border-radius:20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ask-phuoc-orb-core,
+  .ask-phuoc-orb-ring {
+    animation:none !important;
+  }
+}
