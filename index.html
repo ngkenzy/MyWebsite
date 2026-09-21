@@ -348,6 +348,70 @@
     </section>
   </main>
 
+  <button class="ask-phuoc-launch" id="askPhuocLaunch" type="button" aria-controls="askPhuocPanel" aria-expanded="false">
+    <span class="ask-phuoc-orb" aria-hidden="true">
+      <span class="ask-phuoc-orb-core"></span>
+      <span class="ask-phuoc-orb-ring ring-a"></span>
+      <span class="ask-phuoc-orb-ring ring-b"></span>
+    </span>
+    <span class="ask-phuoc-launch-copy">
+      <strong>Ask Phuoc</strong>
+      <small>Local AI</small>
+    </span>
+  </button>
+
+  <aside class="ask-phuoc-panel" id="askPhuocPanel" aria-hidden="true" aria-label="Ask Phuoc local AI">
+    <div class="ask-phuoc-panel-head">
+      <div class="ask-phuoc-identity">
+        <span class="ask-phuoc-mini-orb" aria-hidden="true"></span>
+        <div>
+          <strong>Ask Phuoc</strong>
+          <span>Public portfolio assistant</span>
+        </div>
+      </div>
+      <button class="ask-phuoc-close" id="askPhuocClose" type="button" aria-label="Close Ask Phuoc">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="ask-phuoc-local-note">
+      <i class="fas fa-microchip"></i>
+      <span>Runs on your device. No API key. Public portfolio only.</span>
+    </div>
+
+    <div class="ask-phuoc-model-card">
+      <div>
+        <span class="ask-phuoc-status" id="askPhuocStatus">Not loaded</span>
+        <small>First load downloads a compact model and caches it in your browser.</small>
+      </div>
+      <button id="askPhuocLoad" type="button">Load Local AI</button>
+    </div>
+
+    <div class="ask-phuoc-progress" id="askPhuocProgress" aria-hidden="true">
+      <span id="askPhuocProgressBar"></span>
+    </div>
+
+    <div class="ask-phuoc-suggestions" aria-label="Suggested questions">
+      <button class="ask-phuoc-suggestion" type="button" data-question="What does Phuoc do now?">Current work</button>
+      <button class="ask-phuoc-suggestion" type="button" data-question="What is SOLPIENT Research?">SOLPIENT</button>
+      <button class="ask-phuoc-suggestion" type="button" data-question="What has Phuoc built with AI?">AI work</button>
+    </div>
+
+    <div class="ask-phuoc-messages" id="askPhuocMessages" aria-live="polite"></div>
+
+    <form class="ask-phuoc-form" id="askPhuocForm">
+      <label class="sr-only" for="askPhuocInput">Ask a question about Phuoc</label>
+      <input id="askPhuocInput" type="text" maxlength="180" autocomplete="off" placeholder="Ask about work, projects, research..." />
+      <button id="askPhuocSend" type="submit" aria-label="Send question">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </form>
+
+    <div class="ask-phuoc-foot">
+      Answers are grounded in selected public portfolio content. Private information is not included.
+    </div>
+  </aside>
+
   <footer class="footer-v2">
     <div class="container-v2 footer-row">
       <span>© 2026 Phuoc H. Nguyen</span>
@@ -357,5 +421,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script src="js/portfolio-v2.js"></script>
+  <script src="js/ask-phuoc.js"></script>
 </body>
 </html>
