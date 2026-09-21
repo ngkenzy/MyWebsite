@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const KNOWLEDGE = [
+  const BASE_KNOWLEDGE = [
     { id:"current-role", title:"Current role", tags:["current","job","role","usard","operations research","data systems","decision support platform"], text:"Phuoc currently works in Operations Research and Data Systems at USARD. Since August 2026, he has been building the Decision Support Platform, analytical workflows, and data systems for operational decision making. He applies operations research, statistics, and automation to recurring mission requirements.", source:"Experience", url:"#experience" },
     { id:"cdao", title:"DoD CDAO DataOps", tags:["cdao","dataops","pentagon","data scientist","data operations","joint staff","secure pipelines"], text:"From July 2024 through July 2026, Phuoc served as a Data Operations Projects Lead and Data Scientist at the DoD Chief Digital and Artificial Intelligence Office. His work supported decision support analytics for Joint Staff and Army senior leaders and included secure data pipelines and analytics across multiple classification environments.", source:"Experience", url:"#experience" },
     { id:"trac", title:"Operations research at TRAC", tags:["trac","army futures command","orsa","operations research","simulation","modernization","force design","statistics"], text:"From September 2021 through July 2024, Phuoc was a Lead Operations Research Analyst with Army Futures Command and The Research and Analysis Center. He led predictive analytics, simulation, and statistical studies supporting Army modernization and force design.", source:"Experience", url:"#experience" },
@@ -15,6 +15,8 @@
     { id:"profile", title:"Professional profile", tags:["who","phuoc","background","profile","about","experience"], text:"Phuoc H. Nguyen is an Operations Research Analyst working across data systems and applied AI. His background spans Army and DoD analytics, modeling, intelligence, data engineering, and decision support. He also builds independent technical projects and research systems.", source:"About", url:"#about" },
     { id:"contact", title:"Professional links", tags:["contact","github","linkedin","website","resume"], text:"Phuoc's public professional links include phnguyen.com, github.com/ngkenzy, LinkedIn, his live Overleaf resume, and SOLPIENT Research.", source:"Profile kit", url:"#home" }
   ];
+
+  const KNOWLEDGE = BASE_KNOWLEDGE.concat(Array.isArray(window.ASK_PHUOC_REFLECTIONS) ? window.ASK_PHUOC_REFLECTIONS : []);
 
   const STOP = new Set(["a","an","and","are","as","at","be","by","can","did","do","does","for","from","had","has","have","he","her","him","his","how","i","in","is","it","me","of","on","or","phuoc","tell","that","the","their","them","they","this","to","was","what","when","where","which","who","why","with","work"]);
 
@@ -208,7 +210,7 @@
       loadButton.textContent = "Loaded on this device";
       loadButton.disabled = true;
       form.classList.add("is-ready");
-      addMessage("assistant", "Ready. Ask about Phuoc's work, research, projects, education, or technical background.");
+      addMessage("assistant", "Ready. Ask about Phuoc's work, projects, research, values, or how he thinks.");
     } catch (error) {
       console.error("Ask Phuoc model load failed:", error);
       enableSearchFallback("The local model could not load on this device. Portfolio search is ready instead.");
@@ -229,7 +231,7 @@
       "Do not guess, infer private facts, or add facts from general knowledge. " +
       "If the context does not support the answer, say exactly: That is not in Phuoc's public portfolio. " +
       "Be concise, professional, natural, and specific. Use 1 to 3 short sentences. " +
-      "Refer to him as Phuoc, not as I. Do not discuss family, private life, health, politics, or nonpublic military information.";
+      "Refer to him as Phuoc, not as I. You may discuss the public values and reflections supplied in context, including general views on family, presence, simplicity, discipline, and career. Do not reveal names, private family details, health information, finances, relationships, politics, or nonpublic military information.";
 
     const chunks = await engine.chat.completions.create({
       messages: [
@@ -304,5 +306,5 @@
     });
   }
 
-  addMessage("assistant", "I answer from Phuoc's public portfolio only. Load the local model to start.");
+  addMessage("assistant", "I answer from Phuoc's public portfolio and selected public reflections only. Load the local model to start.");
 })();
