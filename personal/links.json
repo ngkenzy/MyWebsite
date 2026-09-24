@@ -10,16 +10,7 @@
       "parts": [
         "data/financial-01.part",
         "data/financial-02.part",
-        "data/financial-03.part",
-        "data/financial-04.part",
-        "data/financial-05.part",
-        "data/financial-06.part",
-        "data/financial-07.part",
-        "data/financial-08.part",
-        "data/financial-09.part",
-        "data/financial-10.part",
-        "data/financial-11.part",
-        "data/financial-12.part"
+        "data/financial-03.part"
       ]
     }
   ]
