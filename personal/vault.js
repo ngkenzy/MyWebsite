@@ -82,12 +82,22 @@
   }
 
   async function saveSessionKey(key) {
-    const raw = new Uint8Array(await crypto.subtle.exportKey("raw", key));
-    sessionStorage.setItem(SESSION_KEY, bytesToB64(raw));
+    try {
+      const raw = new Uint8Array(await crypto.subtle.exportKey("raw", key));
+      sessionStorage.setItem(SESSION_KEY, bytesToB64(raw));
+    } catch {
+      // Local file browsing may block sessionStorage. The vault can still stay
+      // unlocked in memory until the page is closed or refreshed.
+    }
   }
 
   async function restoreSessionKey() {
-    const saved = sessionStorage.getItem(SESSION_KEY);
+    let saved = null;
+    try {
+      saved = sessionStorage.getItem(SESSION_KEY);
+    } catch {
+      return false;
+    }
     if (!saved) return false;
     try {
       const key = await crypto.subtle.importKey("raw", b64ToBytes(saved), { name: "AES-GCM" }, true, ["encrypt", "decrypt"]);
@@ -212,7 +222,7 @@
   lockButton.addEventListener("click", () => {
     closePrivateViewer();
     vaultKey = null;
-    sessionStorage.removeItem(SESSION_KEY);
+    try { sessionStorage.removeItem(SESSION_KEY); } catch {}
     setUnlocked(false);
     setTimeout(() => pinInput.focus(), 50);
   });
