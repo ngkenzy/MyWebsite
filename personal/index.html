@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Personal Vault | Phuoc H. Nguyen</title>
+  <link rel="icon" href="../img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vault.css">
+</head>
+<body>
+  <div class="vault-bg" aria-hidden="true">
+    <span class="orb orb-a"></span>
+    <span class="orb orb-b"></span>
+    <span class="grid"></span>
+  </div>
+
+  <header class="vault-topbar">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">P</span>
+      <span><strong>Phuoc H. Nguyen</strong><small>Personal Vault</small></span>
+    </a>
+    <div class="top-actions">
+      <span class="privacy-pill"><i></i> Private section</span>
+      <button id="lockButton" class="lock-button" type="button" hidden>Lock</button>
+      <a class="back-link" href="../index.html">Back to site</a>
+    </div>
+  </header>
+
+  <main class="vault-shell">
+    <section id="lockedView" class="gate-card">
+      <div class="vault-emblem" aria-hidden="true">
+        <span class="emblem-core"></span>
+        <span class="emblem-ring r1"></span>
+        <span class="emblem-ring r2"></span>
+      </div>
+      <span class="eyebrow">Personal</span>
+      <h1>One vault.<br><span>Private pages.</span></h1>
+      <p>Enter the shared PIN once. It stays unlocked for this browser session.</p>
+
+      <form id="unlockForm" class="pin-form">
+        <label for="pinInput">PIN</label>
+        <div class="pin-row">
+          <input id="pinInput" inputmode="numeric" autocomplete="current-password" maxlength="12" type="password" placeholder="Enter PIN" required>
+          <button id="unlockButton" type="submit">Unlock</button>
+        </div>
+        <p id="gateMessage" class="gate-message" aria-live="polite"></p>
+      </form>
+
+      <div class="security-note">
+        <span>Encrypted in the public repository</span>
+        <small>The PIN is not stored in page source. Private content is decrypted only in your browser.</small>
+      </div>
+    </section>
+
+    <section id="unlockedView" class="vault-content" hidden>
+      <div class="vault-intro">
+        <div>
+          <span class="eyebrow">Unlocked</span>
+          <h1>Personal.</h1>
+          <p>Private dashboards and pages in one place.</p>
+        </div>
+        <div class="session-status"><i></i><span>Unlocked for this session</span></div>
+      </div>
+      <div id="linkGrid" class="link-grid"></div>
+      <div class="future-note">
+        <strong>Built to grow.</strong>
+        <span>Future personal pages can be added here and use the same vault session.</span>
+      </div>
+    </section>
+  </main>
+
+  <div id="viewer" class="viewer" hidden>
+    <div class="viewer-bar">
+      <div>
+        <span class="viewer-label">Personal Vault</span>
+        <strong id="viewerTitle">Private page</strong>
+      </div>
+      <button id="closeViewer" type="button">Close</button>
+    </div>
+    <div id="viewerLoading" class="viewer-loading">Decrypting locally…</div>
+    <iframe id="viewerFrame" title="Private personal page" sandbox="allow-scripts allow-forms allow-downloads"></iframe>
+  </div>
+
+  <script src="vault.js"></script>
+</body>
+</html>
