@@ -139,6 +139,14 @@
     return JSON.parse(chunks.join(""));
   }
 
+  async function decompressGzip(bytes) {
+    if (!("DecompressionStream" in window)) {
+      throw new Error("This browser cannot decompress the private page.");
+    }
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+    return new Uint8Array(await new Response(stream).arrayBuffer());
+  }
+
   async function openItem(item) {
     if (!vaultKey) return;
     viewer.hidden = false;
@@ -147,7 +155,8 @@
     viewerFrame.removeAttribute("src");
     try {
       const payload = await fetchPayload(item);
-      const bytes = await decryptBytes(payload.content);
+      let bytes = await decryptBytes(payload.content);
+      if (payload.compression === "gzip") bytes = await decompressGzip(bytes);
       if (activeBlobUrl) URL.revokeObjectURL(activeBlobUrl);
       activeBlobUrl = URL.createObjectURL(new Blob([bytes], { type: "text/html" }));
       viewerFrame.onload = () => viewer.classList.add("is-ready");
