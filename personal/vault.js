@@ -36,7 +36,11 @@
   }
 
   async function loadConfig() {
-    if (!config) config = await fetch("config.json", { cache: "no-store" }).then((r) => r.json());
+    if (!config) {
+      const data = window.PERSONAL_VAULT_DATA;
+      if (!data?.config) throw new Error("Vault configuration is unavailable.");
+      config = data.config;
+    }
     return config;
   }
 
@@ -104,7 +108,11 @@
   }
 
   async function getLinks() {
-    if (!links) links = await fetch("links.json", { cache: "no-store" }).then((r) => r.json());
+    if (!links) {
+      const data = window.PERSONAL_VAULT_DATA;
+      if (!Array.isArray(data?.items)) throw new Error("Vault link registry is unavailable.");
+      links = { items: data.items };
+    }
     return links;
   }
 
@@ -130,13 +138,9 @@
   }
 
   async function fetchPayload(item) {
-    const chunks = await Promise.all(item.parts.map((path) =>
-      fetch(path, { cache: "no-store" }).then((r) => {
-        if (!r.ok) throw new Error("Unable to load encrypted content.");
-        return r.text();
-      })
-    ));
-    return JSON.parse(chunks.join(""));
+    const payload = window.PERSONAL_VAULT_DATA?.payloads?.[item.id];
+    if (!payload) throw new Error("Encrypted content is unavailable.");
+    return payload;
   }
 
   async function decompressGzip(bytes) {
