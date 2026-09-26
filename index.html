@@ -7,14 +7,32 @@
   <meta name="robots" content="all,follow">
   <title>Phuoc Nguyen | Operations Research, Data, and Applied AI</title>
   <meta name="description" content="Phuoc H. Nguyen works in operations research, data systems, and applied AI at USARD. He is also the founder and builder of SOLPIENT Research.">
+  <link rel="canonical" href="https://phnguyen.com/">
+  <meta name="theme-color" content="#07111f">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Phuoc Nguyen | Operations Research, Data, and Applied AI">
+  <meta property="og:description" content="Phuoc H. Nguyen works in operations research, data systems, and applied AI at USARD. He is also the founder and builder of SOLPIENT Research.">
+  <meta property="og:url" content="https://phnguyen.com/">
+  <meta property="og:site_name" content="Phuoc H. Nguyen">
+  <meta property="og:image" content="https://phnguyen.com/img/japan-mountains.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Phuoc Nguyen | Operations Research, Data, and Applied AI">
+  <meta name="twitter:description" content="Phuoc H. Nguyen works in operations research, data systems, and applied AI at USARD. He is also the founder and builder of SOLPIENT Research.">
+  <meta name="twitter:image" content="https://phnguyen.com/img/japan-mountains.jpg">
+
   <link rel="shortcut icon" href="img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/59032b78a7.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/59032b78a7.js" crossorigin="anonymous" defer></script>
   <link rel="stylesheet" href="css/portfolio-v2.css">
 </head>
 <body>
+  <a class="skip-link" href="#home">Skip to content</a>
   <nav class="site-nav" aria-label="Primary navigation">
     <div class="container-v2 nav-inner">
       <a class="brand" href="#home" aria-label="Phuoc Nguyen home">
@@ -29,6 +47,7 @@
         <a href="#capabilities">Capabilities</a>
         <a href="#work">Projects</a>
         <a href="research.html">Research</a>
+        <a href="MyBlog/blog.html">Notes</a>
         <a href="https://www.linkedin.com/in/phuoc-nguyen-7634b25/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a class="nav-cta" href="https://solpient-research-app.vercel.app/" target="_blank" rel="noopener noreferrer">SOLPIENT ↗</a>
       </div>
@@ -69,11 +88,11 @@
                 <span class="profile-kit-icon"><i class="fas fa-address-card"></i></span>
                 <span><strong>Business Card</strong><small>Overleaf</small></span>
               </a>
-              <a href="https://www.overleaf.com/read/vdmwqmjczbfb#a90afb" target="_blank" rel="noopener noreferrer" aria-label="Open resume">
-                <span class="profile-kit-icon"><i class="fas fa-file-alt"></i></span>
-                <span><strong>Resume</strong><small>Live version</small></span>
+              <a href="resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download resume PDF">
+                <span class="profile-kit-icon"><i class="fas fa-file-pdf"></i></span>
+                <span><strong>Resume</strong><small>PDF download</small></span>
               </a>
-              <a href="#gallery" class="gallery-trigger" aria-controls="gallery" aria-expanded="false">
+              <a href="#gallery" class="gallery-trigger" role="button" tabindex="0" aria-controls="gallery" aria-expanded="false">
                 <span class="profile-kit-icon"><i class="fas fa-images"></i></span>
                 <span><strong>Gallery</strong><small>Selected photos</small></span>
               </a>
@@ -99,7 +118,7 @@
     <section id="about" class="section-v2">
       <div class="container-v2 about-grid">
         <div class="about-visual reveal">
-          <img class="about-image" src="img/japan-mountains.jpg" alt="Phuoc H. Nguyen">
+          <img class="about-image" src="img/japan-mountains.jpg" alt="Phuoc H. Nguyen" width="600" height="600" loading="lazy" decoding="async">
         </div>
         <div class="about-copy reveal">
           <div class="kicker">About</div>
@@ -215,7 +234,7 @@
             <div class="work-top"><div class="work-icon"><i class="fas fa-shield-alt"></i></div><div class="work-tag">Hackathon</div></div>
             <h3>Mission Tailor AI</h3>
             <p>Built a context aware multimodal threat detection prototype at NDIA 2025.</p>
-            <div class="work-links"><a href="img/Hackathon3.jpg" target="_blank">Project photo ↗</a></div>
+            <div class="work-links"><a href="img/Hackathon3.jpg" target="_blank" rel="noopener noreferrer">Project photo ↗</a></div>
           </article>
 
           <article class="work-card tilt reveal">
@@ -280,8 +299,9 @@
           <h2>Experience.</h2>
           <p>Intelligence, operations research, data, and AI.</p>
           <div class="hero-actions">
-            <a class="btn-v2 btn-dark-v2" href="https://www.overleaf.com/read/vdmwqmjczbfb#a90afb" target="_blank">Resume</a>
-            <a class="btn-v2 btn-outline-v2" href="research.html">Research portfolio</a>
+            <a class="btn-v2 btn-dark-v2" href="resume.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> Resume (PDF)</a>
+            <a class="btn-v2 btn-outline-v2" href="https://www.overleaf.com/read/vdmwqmjczbfb#a90afb" target="_blank" rel="noopener noreferrer">Overleaf Live ↗</a>
+            <a class="btn-v2 btn-ghost-v2" href="research.html">Research</a>
           </div>
         </div>
         <div class="timeline reveal">

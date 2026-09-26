@@ -79,146 +79,178 @@
       e.preventDefault();
       setGallery(!gallery.classList.contains("is-open"));
     });
+    galleryTrigger.addEventListener("keydown", (e) => {
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        setGallery(!gallery.classList.contains("is-open"));
+      }
+    });
   }
   if (galleryClose) {
     galleryClose.addEventListener("click", () => setGallery(false));
   }
 
-  const holder = document.getElementById("hero3d");
-  if (!holder || !window.THREE || reduced) return;
+  function initHero3D() {
+    const holder = document.getElementById("hero3d");
+    if (!holder || !window.THREE || reduced) return;
 
-  const THREE = window.THREE;
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(44, 1, 0.1, 100);
-  camera.position.set(0, 0, 7.2);
+    const THREE = window.THREE;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(44, 1, 0.1, 100);
+    camera.position.set(0, 0, 7.2);
 
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
-  renderer.setClearColor(0x000000, 0);
-  holder.appendChild(renderer.domElement);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
+    renderer.setClearColor(0x000000, 0);
+    holder.appendChild(renderer.domElement);
 
-  const group = new THREE.Group();
-  scene.add(group);
+    const group = new THREE.Group();
+    scene.add(group);
 
-  const nodeCount = 86;
-  const radius = 2.15;
-  const positions = [];
-  const pointPositions = new Float32Array(nodeCount * 3);
+    const nodeCount = 86;
+    const radius = 2.15;
+    const positions = [];
+    const pointPositions = new Float32Array(nodeCount * 3);
 
-  for (let i = 0; i < nodeCount; i++) {
-    const phi = Math.acos(1 - 2 * (i + 0.5) / nodeCount);
-    const theta = Math.PI * (1 + Math.sqrt(5)) * i;
-    const jitter = 0.88 + Math.random() * 0.18;
-    const p = new THREE.Vector3(
-      radius * jitter * Math.sin(phi) * Math.cos(theta),
-      radius * jitter * Math.cos(phi),
-      radius * jitter * Math.sin(phi) * Math.sin(theta)
-    );
-    positions.push(p);
-    pointPositions[i * 3] = p.x;
-    pointPositions[i * 3 + 1] = p.y;
-    pointPositions[i * 3 + 2] = p.z;
-  }
+    for (let i = 0; i < nodeCount; i++) {
+      const phi = Math.acos(1 - 2 * (i + 0.5) / nodeCount);
+      const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+      const jitter = 0.88 + Math.random() * 0.18;
+      const p = new THREE.Vector3(
+        radius * jitter * Math.sin(phi) * Math.cos(theta),
+        radius * jitter * Math.cos(phi),
+        radius * jitter * Math.sin(phi) * Math.sin(theta)
+      );
+      positions.push(p);
+      pointPositions[i * 3] = p.x;
+      pointPositions[i * 3 + 1] = p.y;
+      pointPositions[i * 3 + 2] = p.z;
+    }
 
-  const pointGeo = new THREE.BufferGeometry();
-  pointGeo.setAttribute("position", new THREE.BufferAttribute(pointPositions, 3));
-  const pointMat = new THREE.PointsMaterial({
-    color: 0xb9caff,
-    size: 0.055,
-    transparent: true,
-    opacity: 0.92,
-    sizeAttenuation: true
-  });
-  group.add(new THREE.Points(pointGeo, pointMat));
-
-  const lineVerts = [];
-  for (let i = 0; i < nodeCount; i++) {
-    const nearest = positions
-      .map((p, j) => ({ j, d: i === j ? Infinity : positions[i].distanceTo(p) }))
-      .sort((a, b) => a.d - b.d)
-      .slice(0, 2);
-    nearest.forEach(({ j, d }) => {
-      if (j > i && d < 1.1) {
-        lineVerts.push(
-          positions[i].x, positions[i].y, positions[i].z,
-          positions[j].x, positions[j].y, positions[j].z
-        );
-      }
+    const pointGeo = new THREE.BufferGeometry();
+    pointGeo.setAttribute("position", new THREE.BufferAttribute(pointPositions, 3));
+    const pointMat = new THREE.PointsMaterial({
+      color: 0xb9caff,
+      size: 0.055,
+      transparent: true,
+      opacity: 0.92,
+      sizeAttenuation: true
     });
+    group.add(new THREE.Points(pointGeo, pointMat));
+
+    const lineVerts = [];
+    for (let i = 0; i < nodeCount; i++) {
+      const nearest = positions
+        .map((p, j) => ({ j, d: i === j ? Infinity : positions[i].distanceTo(p) }))
+        .sort((a, b) => a.d - b.d)
+        .slice(0, 2);
+      nearest.forEach(({ j, d }) => {
+        if (j > i && d < 1.1) {
+          lineVerts.push(
+            positions[i].x, positions[i].y, positions[i].z,
+            positions[j].x, positions[j].y, positions[j].z
+          );
+        }
+      });
+    }
+
+    const lineGeo = new THREE.BufferGeometry();
+    lineGeo.setAttribute("position", new THREE.Float32BufferAttribute(lineVerts, 3));
+    const lineMat = new THREE.LineBasicMaterial({
+      color: 0x5d80e8,
+      transparent: true,
+      opacity: 0.24
+    });
+    group.add(new THREE.LineSegments(lineGeo, lineMat));
+
+    const shellGeo = new THREE.IcosahedronGeometry(2.33, 2);
+    const shellMat = new THREE.MeshBasicMaterial({
+      color: 0x3b5fc3,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.05
+    });
+    group.add(new THREE.Mesh(shellGeo, shellMat));
+
+    const ringGeo = new THREE.TorusGeometry(2.72, 0.006, 8, 180);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: 0x59d7c6,
+      transparent: true,
+      opacity: 0.18
+    });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = 1.07;
+    ring.rotation.y = 0.3;
+    group.add(ring);
+
+    const coreGeo = new THREE.SphereGeometry(0.11, 20, 20);
+    const coreMat = new THREE.MeshBasicMaterial({ color: 0x59d7c6 });
+    const core = new THREE.Mesh(coreGeo, coreMat);
+    group.add(core);
+
+    let targetX = 0;
+    let targetY = 0;
+    holder.addEventListener("pointermove", (e) => {
+      const r = holder.getBoundingClientRect();
+      targetX = ((e.clientX - r.left) / r.width - 0.5) * 0.26;
+      targetY = ((e.clientY - r.top) / r.height - 0.5) * 0.18;
+    });
+    holder.addEventListener("pointerleave", () => {
+      targetX = 0;
+      targetY = 0;
+    });
+
+    const resize = () => {
+      const w = Math.max(holder.clientWidth, 320);
+      const h = Math.max(holder.clientHeight, 280);
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    let last = 0;
+    let isVisible = true;
+    let animId = null;
+
+    const animate = (t) => {
+      if (!isVisible) {
+        animId = null;
+        return;
+      }
+      const dt = Math.min((t - last) / 1000 || 0, 0.05);
+      last = t;
+      group.rotation.y += dt * 0.12;
+      group.rotation.x += (targetY - group.rotation.x) * 0.025;
+      group.rotation.z += (targetX - group.rotation.z) * 0.025;
+      ring.rotation.z += dt * 0.07;
+      core.scale.setScalar(1 + Math.sin(t * 0.0018) * 0.12);
+      renderer.render(scene, camera);
+      animId = requestAnimationFrame(animate);
+    };
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animId) {
+            last = performance.now();
+            animId = requestAnimationFrame(animate);
+          }
+        });
+      }, { threshold: 0.05 });
+      observer.observe(holder);
+    } else {
+      animId = requestAnimationFrame(animate);
+    }
   }
 
-  const lineGeo = new THREE.BufferGeometry();
-  lineGeo.setAttribute("position", new THREE.Float32BufferAttribute(lineVerts, 3));
-  const lineMat = new THREE.LineBasicMaterial({
-    color: 0x5d80e8,
-    transparent: true,
-    opacity: 0.24
-  });
-  group.add(new THREE.LineSegments(lineGeo, lineMat));
+  function initSolpient3D() {
+    const solHolder = document.getElementById("solpient3d");
+    if (!solHolder || !window.THREE || reduced) return;
 
-  const shellGeo = new THREE.IcosahedronGeometry(2.33, 2);
-  const shellMat = new THREE.MeshBasicMaterial({
-    color: 0x3b5fc3,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.05
-  });
-  group.add(new THREE.Mesh(shellGeo, shellMat));
-
-  const ringGeo = new THREE.TorusGeometry(2.72, 0.006, 8, 180);
-  const ringMat = new THREE.MeshBasicMaterial({
-    color: 0x59d7c6,
-    transparent: true,
-    opacity: 0.18
-  });
-  const ring = new THREE.Mesh(ringGeo, ringMat);
-  ring.rotation.x = 1.07;
-  ring.rotation.y = 0.3;
-  group.add(ring);
-
-  const coreGeo = new THREE.SphereGeometry(0.11, 20, 20);
-  const coreMat = new THREE.MeshBasicMaterial({ color: 0x59d7c6 });
-  const core = new THREE.Mesh(coreGeo, coreMat);
-  group.add(core);
-
-  let targetX = 0;
-  let targetY = 0;
-  holder.addEventListener("pointermove", (e) => {
-    const r = holder.getBoundingClientRect();
-    targetX = ((e.clientX - r.left) / r.width - 0.5) * 0.26;
-    targetY = ((e.clientY - r.top) / r.height - 0.5) * 0.18;
-  });
-  holder.addEventListener("pointerleave", () => {
-    targetX = 0;
-    targetY = 0;
-  });
-
-  const resize = () => {
-    const w = Math.max(holder.clientWidth, 320);
-    const h = Math.max(holder.clientHeight, 280);
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  };
-  resize();
-  window.addEventListener("resize", resize);
-
-  let last = 0;
-  const animate = (t) => {
-    const dt = Math.min((t - last) / 1000 || 0, 0.05);
-    last = t;
-    group.rotation.y += dt * 0.12;
-    group.rotation.x += (targetY - group.rotation.x) * 0.025;
-    group.rotation.z += (targetX - group.rotation.z) * 0.025;
-    ring.rotation.z += dt * 0.07;
-    core.scale.setScalar(1 + Math.sin(t * 0.0018) * 0.12);
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  };
-  requestAnimationFrame(animate);
-
-  const solHolder = document.getElementById("solpient3d");
-  if (solHolder) {
+    const THREE = window.THREE;
     const solScene = new THREE.Scene();
     const solCamera = new THREE.PerspectiveCamera(42, 1, 0.1, 50);
     solCamera.position.set(4.8, 3.5, 6.2);
@@ -287,12 +319,35 @@
     solResize();
     window.addEventListener("resize", solResize);
 
+    let isVisible = true;
+    let animId = null;
+
     const animateSolpient = (t) => {
+      if (!isVisible) {
+        animId = null;
+        return;
+      }
       stack.rotation.y = -0.42 + Math.sin(t * 0.00022) * 0.09;
       stack.position.y = Math.sin(t * 0.0007) * 0.05;
       solRenderer.render(solScene, solCamera);
-      requestAnimationFrame(animateSolpient);
+      animId = requestAnimationFrame(animateSolpient);
     };
-    requestAnimationFrame(animateSolpient);
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animId) {
+            animId = requestAnimationFrame(animateSolpient);
+          }
+        });
+      }, { threshold: 0.05 });
+      observer.observe(solHolder);
+    } else {
+      animId = requestAnimationFrame(animateSolpient);
+    }
   }
+
+  initHero3D();
+  initSolpient3D();
 })();

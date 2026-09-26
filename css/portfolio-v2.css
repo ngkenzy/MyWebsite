@@ -30,6 +30,29 @@ img { max-width: 100%; display: block; }
 button, a { -webkit-tap-highlight-color: transparent; }
 .container-v2 { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
 
+.skip-link {
+  position: absolute;
+  top: -120px;
+  left: 20px;
+  z-index: 9999;
+  padding: 10px 18px;
+  background: var(--navy);
+  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: top 0.2s ease;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 18px;
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
 .site-nav {
   position: fixed;
   inset: 0 0 auto;
