@@ -181,6 +181,7 @@
       const webllm = await import("https://esm.run/@mlc-ai/web-llm");
       const available = webllm.prebuiltAppConfig.model_list.map((m) => m.model_id);
       const preferred = [
+        "Qwen2.5-3B-Instruct-q4f16_1-MLC",
         "Qwen2.5-0.5B-Instruct-q4f16_1-MLC",
         "Qwen2-0.5B-Instruct-q4f16_1-MLC",
         "Llama-3.2-1B-Instruct-q4f16_1-MLC"
