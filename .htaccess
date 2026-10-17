@@ -1,0 +1,17 @@
+# Defense in depth for Apache-compatible Hostinger hosting.
+# Publish only dist/. These rules also block legacy files left in public_html.
+Options -Indexes
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(?:personal|img/Pictures|\.git|\.github|scripts|docs)(?:/|$) - [F,L,NC]
+  RewriteRule ^(?:resume\.tex|framingham\.csv|Final\ Project\.docx|Manual\.pdf|img/Resume\.pdf)$ - [F,L,NC]
+  RewriteRule ^js/(?:ask-phuoc(?:-reflections)?|retirement-countdown)\.js$ - [F,L,NC]
+</IfModule>
+<FilesMatch "(?i)(^\.(?!well-known)|\.(?:part|lrcat|lrprev|db|ini|tex|log|bak|env)$)">
+  Require all denied
+</FilesMatch>
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
