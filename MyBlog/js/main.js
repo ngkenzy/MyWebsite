@@ -300,7 +300,12 @@ let editingId = null;
 function loadPosts() {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (!stored) return seedPosts;
-  try { return JSON.parse(stored); } catch { return seedPosts; }
+  try {
+    const saved = JSON.parse(stored);
+    // Add curated posts that are newer than this browser's saved copy
+    const savedIds = new Set(saved.map((post) => post.id));
+    return [...saved, ...seedPosts.filter((post) => !savedIds.has(post.id))];
+  } catch { return seedPosts; }
 }
 
 function savePosts() {
