@@ -279,6 +279,162 @@ Impermanence is often heard as a warning. It can also be an invitation: to stop 
 Deliberate living is simpler. When studying, study. When resting, rest. When someone speaks, listen. When the day ends, close it without regret.
 
 If we do this consistently, we do not need to do everything. We only need to be awake to what we are doing.`
+  },
+  {
+    id: "diary-2026-08-10-long-term",
+    title: "Think and Act Long-Term",
+    date: "2026-08-10",
+    category: "Learning",
+    body: `Love grows from long-term relationships. Health grows from long-term habits. Wealth grows from long-term investment. Peace grows from long-term self-reflection. Talent grows from long-term focused effort.
+
+Most short-term choices feel urgent and matter little. The choices that shape a life are usually quiet and repeated: a walk taken again, a conversation handled with care, a dollar saved every month.
+
+If you want something to last, think and act for the long term.`
+  },
+  {
+    id: "diary-2026-08-24-good-person",
+    title: "Be a Good Person",
+    date: "2026-08-24",
+    category: "Teaching",
+    body: `The things people often try to impress others with are temporary: what they own, what they wear, where they live, what they drive.
+
+What lasts is character. I have deep respect for people with pure hearts and good intentions, whatever their station.
+
+Be honest. Be kind. Keep your word. Those qualities are visible to everyone, and they are the only impression that stays.`
+  },
+  {
+    id: "diary-2026-09-07-simple-disciplines",
+    title: "Simple Disciplines",
+    date: "2026-09-07",
+    category: "Learning",
+    body: `Success is often described as a few simple disciplines, practiced every day. Failure is often a few small errors in judgment, repeated every day.
+
+The difference is rarely talent or luck. It is whether the small habits are kept.
+
+Pick one discipline this week. Practice it every day, even when it feels too small to matter. Small things repeated are how a life changes.`
+  },
+  {
+    id: "diary-2026-09-21-let-go-gently",
+    title: "Passing Through",
+    date: "2026-09-21",
+    category: "Reflection",
+    body: `We close our hands around things we do not truly own, and call it life because they stayed a while. Even the sky cannot keep its colors. The wave remembers the shore it touched, then goes back out to sea.
+
+Why does the heart tremble at goodbye when we are only passing through?
+
+Hold things with open hands. Love fully, care fully, and then let the moment be what it was. That is not loss. That is how things are meant to move.`
+  },
+  {
+    id: "diary-2026-08-03-speak-clearly",
+    title: "Speak Clearly, Listen Fully",
+    date: "2026-08-03",
+    category: "Learning",
+    body: `Communication is one of the simplest crafts to practice and one of the easiest to neglect.
+
+Speak clearly and calmly so people can follow without strain. Keep it brief. Use facts, not volume.
+
+Listen the same way. Notice the content, the emotion, and the urgency behind the words. Reflect before responding.
+
+Clear words and attentive listening reduce more friction than any clever argument.`
+  },
+  {
+    id: "diary-2026-08-06-better-questions",
+    title: "Ask Better Questions",
+    date: "2026-08-06",
+    category: "Learning",
+    body: `The quality of an answer often depends on the question behind it.
+
+Instead of asking what someone wants me to say, I try to ask what they are actually trying to solve. Instead of asking how to win an argument, I ask what would help both sides see more clearly.
+
+Good questions slow the mind down. They turn a reaction into a decision.`
+  },
+  {
+    id: "diary-2026-08-12-being-here",
+    title: "The Rare Gift of Being Here",
+    date: "2026-08-12",
+    category: "Reflection",
+    body: `Out of all the possibilities in the universe, we exist in this moment, breathing and thinking. That alone is a kind of luck that is easy to forget.
+
+Time moves whether we pay attention or not. Anger, regret, and resentment take up the hours we have, and they add nothing that lasts.
+
+The question is not how to cram more into the time we have. It is how to live it consciously.`
+  },
+  {
+    id: "diary-2026-08-17-protect-body",
+    title: "Protect the Body",
+    date: "2026-08-17",
+    category: "Health",
+    body: `The body is the foundation under every other craft. A sharp mind and a steady heart both depend on it.
+
+Daily movement matters more than occasional intensity. A walk after dinner, a stretch in the morning, and enough rest are simple habits that compound.
+
+Listen to the body when it asks for a slower day. Strength is not only pushing harder. It is also knowing when to recover.`
+  },
+  {
+    id: "diary-2026-08-20-plan-lightly",
+    title: "Plan Lightly",
+    date: "2026-08-20",
+    category: "Reflection",
+    body: `Planning is useful. Obsessing over plans is not.
+
+A good plan gives direction. It does not need to predict every turn. When I hold plans too tightly, every change feels like a threat. When I hold them lightly, changes become information.
+
+Make the plan. Take the next step. Then meet the season as it comes.`
+  },
+  {
+    id: "diary-2026-08-27-stewardship",
+    title: "Steward What You Have",
+    date: "2026-08-27",
+    category: "Learning",
+    body: `Money, time, and attention are resources. Money is not the purpose of life, but it can buy stability and room to focus on what matters.
+
+Steward them calmly. Make decisions from a plan, not from fear or excitement. Avoid chasing returns and avoid panic when markets drop.
+
+The goal is not to accumulate for its own sake. The goal is to have enough freedom to live well and to take care of the people who depend on you.`
+  },
+  {
+    id: "diary-2026-09-01-monk-stages",
+    title: "What a Monk Said About Ages",
+    date: "2026-09-01",
+    category: "Teaching",
+    body: `A monk once said that at forty, the highly educated and the less educated are the same. At fifty, beauty and ugliness are the same. At sixty, high and low positions are the same. At seventy, a big house and a small house are the same. At eighty, having money or not is the same. At ninety, sleeping and waking are the same.
+
+It is a reminder that many of the things we chase are labels we give to life. As the years pass, the labels fall away, and what remains is how we treated people and how fully we lived.
+
+Hold the labels lightly. Live fully inside them.`
+  },
+  {
+    id: "diary-2026-09-10-present-with-children",
+    title: "Present With Children",
+    date: "2026-09-10",
+    category: "Family",
+    body: `Children do not need perfect parents. They need present ones.
+
+It is easy to sit beside a child while thinking about the next task, the next worry, or the next year. It is harder, and more important, to put the phone down and play without rushing.
+
+Be patient with the slow parts. Guide without controlling. Show up on the ordinary days, because those are the days that shape them most.`
+  },
+  {
+    id: "diary-2026-09-14-guide-without-gripping",
+    title: "Guide Without Gripping",
+    date: "2026-09-14",
+    category: "Family",
+    body: `The role of a parent, mentor, or teacher is to guide, not to control.
+
+Guiding means offering a clear direction, explaining the reasons, and then making room for the other person to choose. Controlling means deciding for them and then measuring them against your plan.
+
+Support, then step back. Care deeply, but do not cling.`
+  },
+  {
+    id: "diary-2026-09-28-carry-lightly",
+    title: "Carry It Lightly",
+    date: "2026-09-28",
+    category: "Reflection",
+    body: `Responsibilities do not disappear because we wish they would. The house still needs care, the work still needs attention, and the people we love still depend on us.
+
+The difference is in how we carry them. Carried tightly, every duty becomes friction. Carried lightly, the same duties become part of a day we can live in.
+
+Duty and peace are not opposites. The work is to hold both without gripping.`
   }
 ];
 
