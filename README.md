@@ -1,4 +1,6 @@
-# Phuoc H. Nguyen — professional portfolio
+# MyWebsite v2 — Phuoc H. Nguyen
+
+Version 2 of Phuoc H. Nguyen's professional portfolio. This redesign is developed on the `redesign/professional-portfolio` branch while the existing website remains on `main`.
 
 Static HTML, CSS, and a small progressive-enhancement navigation script. No framework, dependency installation, or external services are required for the homepage and research page.
 
