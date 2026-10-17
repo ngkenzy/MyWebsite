@@ -20,6 +20,7 @@
     <link rel="icon" href="img/favicon.png">
     <link rel="stylesheet" href="css/portfolio.css">
     <link rel="stylesheet" href="css/ask-phuoc.css">
+    <link rel="stylesheet" href="css/v1-theme.css">
     <script src="js/portfolio.js" defer></script>
   </head>
   <body>
@@ -38,6 +39,7 @@
     </header>
     <main id="main" tabindex="-1">
       <section id="home" class="hero wrap">
+        <div id="hero3d" aria-hidden="true"></div>
         <div class="hero-copy">
           <p class="eyebrow"><span class="small-line"></span> Decision science · Operations research · Applied AI</p>
           <h1>Rigorous thinking.<br><em>Decisive action.</em></h1>
@@ -322,6 +324,8 @@
     </div>
   </aside>
 
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="js/hero3d.js"></script>
   <script src="js/ask-phuoc-reflections.js"></script>
   <script src="js/ask-phuoc.js"></script>
   </body>
