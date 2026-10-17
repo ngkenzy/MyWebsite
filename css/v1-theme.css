@@ -1,0 +1,113 @@
+/* Version 1 colors and hero 3D, applied to the v2 layout */
+:root {
+  --paper: #07111f;
+  --ink: #e8eef6;
+  --muted: #94a4b8;
+  --line: #263649;
+  --accent: #4f7cff;
+  --accent-2: #59d7c6;
+  --dark: #0e1d31;
+  --white: #e8eef6;
+}
+
+body {
+  background: #07111f;
+  color: #e8eef6;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+#hero3d {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero > *:not(#hero3d) {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 860px) {
+  #hero3d {
+    width: 100%;
+    height: 45%;
+    opacity: 0.45;
+  }
+}
+
+/* Cream and green surfaces from the v2 layout, recolored to the version 1 palette */
+::selection {
+  background: #4f7cff;
+  color: #07111f;
+}
+
+h1 em,
+.paper-number {
+  color: #8fb0ff;
+}
+
+.monogram span,
+.hero-aside:before {
+  color: #59d7c6;
+  background: #59d7c6;
+}
+
+.hero-aside,
+.decision-path span,
+.experience,
+.research-system {
+  background: #101b2c;
+}
+
+.hero-aside,
+.decision-path span {
+  border-color: #263649;
+}
+
+.hero-aside h2,
+.hero-aside p,
+.decision-path h2,
+.decision-path p,
+.experience h2,
+.experience p,
+.research-system h2,
+.research-system p {
+  color: #e8eef6;
+}
+
+.hero-aside p,
+.decision-path p,
+.experience p,
+.research-system p {
+  color: #94a4b8;
+}
+
+.evidence-panel {
+  color: #e8eef6;
+}
+
+.evidence-panel li {
+  border-color: #263649;
+}
+
+.contact {
+  color: #e8eef6;
+}
+
+.button.light {
+  background: #4f7cff;
+  border-color: #4f7cff;
+  color: #ffffff;
+}
+
+.button.light:hover {
+  background: #6b92ff;
+}
