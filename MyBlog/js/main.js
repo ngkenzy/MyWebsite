@@ -231,6 +231,54 @@ Raw emotion belongs in a private journal. Public writing should be processed wis
 This does not mean hiding the truth. It means respecting timing.
 
 Write everything. Publish selectively. Let clarity age before it speaks.`
+  },
+  {
+    id: "diary-2026-10-17-do-not-choose",
+    title: "Do Not Choose, Do Not Cling",
+    date: "2026-10-17",
+    category: "Teaching",
+    body: `Tín Tâm Minh, the Faith in Mind poem attributed to the Third Patriarch Sengcan, begins with a simple warning: the Great Way is not difficult. It only asks that we stop choosing.
+
+When the mind divides everything into what it likes and what it dislikes, it grows tired. Every preference becomes a small weight to carry.
+
+Practice is not forcing the mind to be quiet. It is noticing when we are choosing, and letting the choice settle. The mind does not need to be fixed. It only needs to stop grasping.
+
+Not choosing does not mean not caring. It means caring without gripping.`
+  },
+  {
+    id: "diary-2026-10-17-want-less",
+    title: "I Want Less",
+    date: "2026-10-17",
+    category: "Reflection",
+    body: `There is a difference between wanting more and wanting less.
+
+Wanting more is easy to recognize: more money, more success, more recognition. Wanting less is quieter. Less rehearsal. Less comparison. Fewer open loops running in the background.
+
+Most of life's weight does not come from one dramatic problem. It comes from many small duties that never fully end, all carried at once. The work is not to have no responsibilities. The work is to notice which ones are being carried twice, once in the hands and again in the head.
+
+Start with one loop. Close it. Then notice how much space that frees.`
+  },
+  {
+    id: "diary-2026-10-17-real-flower",
+    title: "The Real Flower Fades",
+    date: "2026-10-17",
+    category: "Reflection",
+    body: `A fake flower never fades, and that is exactly why it means little. A real flower is precious because it will wilt.
+
+Time works the same way. Each day is one that will not come back. That is not a reason for panic. It is a reason to pay attention.
+
+Impermanence is often heard as a warning. It can also be an invitation: to stop postponing what matters, to let go of what was never ours to hold, and to meet this season while it is here.`
+  },
+  {
+    id: "diary-2026-10-17-deliberate",
+    title: "Live Deliberately, Not Frantically",
+    date: "2026-10-17",
+    category: "Learning",
+    body: `Maximizing every hour is not the same as living well. Rushing, pressuring ourselves, and turning life into a checklist can make even good days feel empty.
+
+Deliberate living is simpler. When studying, study. When resting, rest. When someone speaks, listen. When the day ends, close it without regret.
+
+If we do this consistently, we do not need to do everything. We only need to be awake to what we are doing.`
   }
 ];
 
